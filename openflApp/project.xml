@@ -16,7 +16,7 @@
 	<source path="src" />
 	<!--<source path=".." />-->
 	<haxelib name="openfl" />
-	<haxelib name="smartfox-haxe-client"/>
+	<haxelib name="sfs2x-api-haxe"/>
 	
 	<!-- assets -->
 	<icon path="assets/openfl.svg" />

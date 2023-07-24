@@ -1,4 +1,3 @@
-
 package com.smartfoxserver.v2.requests.buddylist;
 import com.smartfoxserver.v2.SmartFox;
 import com.smartfoxserver.v2.entities.Buddy;

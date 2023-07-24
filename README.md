@@ -58,11 +58,11 @@ Instructions:
 Installation
 
 ```
-haxelib git smartfox-haxe-client https://github.com/barisyild/smartfox-haxe-client.git
+haxelib git sfs2x-api-haxe https://github.com/barisyild/sfs2x-api-haxe.git
 ```
 add in your project.xml:
 ```
-<haxelib name="smartfox-haxe-client"/>
+<haxelib name="sfs2x-api-haxe"/>
 ```
 Then you can use it like the as3 api, check the as3 exemples there:
 http://docs2x.smartfoxserver.com/ExamplesFlash/introduction

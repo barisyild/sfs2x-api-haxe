@@ -1,22 +1,21 @@
 {
-    "name": "smartfox-haxe-client",
+    "name": "sfs2x-api-haxe",
     "license": "MIT",
     "tags": [
         "openfl",
         "server"
     ],
-    "description": "use smartfox in your haxe project",
+    "description": "SmartFoxServer 2X client api for haxe",
     "contributors": [
         "boorik <Vincent Blanchet>",
 		"barisyild <Baris Cagri Yildirim>"
     ],
     "releasenote": "new targets added.",
     "version": "0.2.2",
-    "url": "https://github.com/barisyild/smartfox-haxe-client",
+    "url": "https://github.com/barisyild/sfs2x-api-haxe",
     "dependencies": {
-        "lime": "",
-        "openfl": "",
-		"haxe-crypto":"",
-		"haxe-ws":""
-    }
+        "haxe-crypto":"",
+        "colyseus-websocket":""
+    },
+    "classPath": "src/"
 }
