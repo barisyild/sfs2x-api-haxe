@@ -19,3 +19,18 @@ jobs:
           haxelib install hxjava
       - name: Build libraries
         run: haxe build.hxml
+      - uses: actions/upload-artifact@v3
+        with:
+           name: sfs2x.js
+           path: bin/sfs2x.js
+           if-no-files-found: error
+      - uses: actions/upload-artifact@v3
+        with:
+          name: sfs2x.jar
+          path: bin/sfs2x.jar
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v3
+        with:
+          name: sfs2x.lua
+          path: bin/sfs2x.lua
+          if-no-files-found: error
