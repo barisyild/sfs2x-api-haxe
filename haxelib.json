@@ -10,7 +10,6 @@
     ],
     "description": "SmartFoxServer 2X client api for haxe",
     "contributors": [
-        "boorik",
 		"barisyild"
     ],
     "releasenote": "release",
