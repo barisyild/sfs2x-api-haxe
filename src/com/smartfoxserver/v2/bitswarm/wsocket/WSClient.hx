@@ -129,8 +129,8 @@ class WSClient extends EventDispatcher
 
 	public function close() : Void
 	{
-		ws.close();
 		_connected = false;
+		ws.close();
 	}
 }
 
