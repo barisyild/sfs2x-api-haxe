@@ -1,13 +1,20 @@
 -cp src
 -dce full
--lib haxe-crypto
--lib haxe-ws
+-lib sfs2x-api-haxe
+
 #-lib hxssl
+
 #-lua bin/lua.lua
-#-php bin/php
+
 #-hl bin/test.hl #Working correctly
-#-cpp bin/cpp.exe
+
 -python bin/py.py
+
+#-swf bin/as3.swf
+#-swf-version 11
+
 #-cs bin/cs.exe
-#-java bin/java.exe
+
+#-java bin/java
+
 -main HXMLMain
