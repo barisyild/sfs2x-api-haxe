@@ -43,8 +43,3 @@ jobs:
           name: sfs2x.py
           path: bin/sfs2x.py
           if-no-files-found: error
-      - uses: actions/upload-artifact@v3
-        with:
-          name: sfs2x.php.zip
-          path: bin/php
-          if-no-files-found: error
