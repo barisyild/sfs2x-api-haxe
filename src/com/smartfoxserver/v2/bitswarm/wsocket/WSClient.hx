@@ -74,6 +74,8 @@ class WSClient extends EventDispatcher
 			}));
 		};
 		ws.onclose = function(?e:Dynamic) {
+			if(!_connected)
+				return;
 			_connected = false;
 			dispatchEvent(new WSEvent(WSEvent.CLOSED, { }));
 			//ws = null;
