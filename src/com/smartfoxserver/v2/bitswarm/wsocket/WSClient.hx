@@ -1,6 +1,12 @@
 ﻿package com.smartfoxserver.v2.bitswarm.wsocket;
 
+#if flash
+import flash.utils.Endian;
+#elseif openfl
+import openfl.utils.Endian;
+#else
 import com.hurlant.util.Endian;
+#end
 import haxe.io.Bytes;
 import haxe.net.WebSocket;
 import com.smartfoxserver.v2.events.EventDispatcher;

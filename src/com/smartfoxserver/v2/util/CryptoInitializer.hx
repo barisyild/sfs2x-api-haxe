@@ -3,7 +3,13 @@ import haxe.Http;
 import com.hurlant.util.Base64;
 import com.smartfoxserver.v2.core.SFSEvent;
 import com.smartfoxserver.v2.util.ByteArray;
+#if flash
+import flash.utils.Endian;
+#elseif openfl
+import openfl.utils.Endian;
+#else
 import com.hurlant.util.Endian;
+#end
 
 /**
  * ...

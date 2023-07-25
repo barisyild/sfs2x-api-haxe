@@ -1,5 +1,6 @@
 package com.smartfoxserver.v2.core;
 
+import haxe.io.Bytes;
 import com.smartfoxserver.v2.bitswarm.BitSwarmClient;
 import com.smartfoxserver.v2.bitswarm.IController;
 import com.smartfoxserver.v2.bitswarm.IMessage;
@@ -41,7 +42,7 @@ class SFSProtocolCodec implements IProtocolCodec
 		/*
 		* TCP Data provides a ByteArray
 		*/
-		if(Std.isOfType(packet, com.smartfoxserver.v2.util.ByteArray.ByteArrayData))
+		if(Std.isOfType(packet, Bytes))
 			sfsObj = SFSObject.newFromBinaryData(packet);
 				
 		/*

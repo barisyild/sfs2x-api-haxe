@@ -1,5 +1,10 @@
 package com.smartfoxserver.v2.util;
 
+#if flash
+typedef ByteArray = flash.utils.ByteArray;
+#elseif openfl
+typedef ByteArray = openfl.utils.ByteArray;
+#else
 import haxe.Int32;
 import com.hurlant.util.Std2;
 import com.hurlant.util.IDataInput;
@@ -124,9 +129,8 @@ abstract ByteArray(ByteArrayData) to ByteArrayData from ByteArrayData {
     @:arrayAccess public function set(index:Int, value:Int):Int { return this.set(index, value); }
 }
 
-class ByteArrayData implements IDataOutput implements IDataInput {
+class ByteArrayData extends Bytes implements IDataOutput implements IDataInput {
     public var position(get, set):Int;
-    public var length(get, set):Int;
     public var bytesAvailable(get, never):Int;
     public var endian:Endian = Endian.BIG_ENDIAN;
     //public var endian:Endian = Endian.LITTLE_ENDIAN;
@@ -233,17 +237,6 @@ class ByteArrayData implements IDataOutput implements IDataInput {
         var result = bswap32Endian(this._data.getInt32(this.position));
         this._position += 4;
         return result;
-    }
-
-    public function set(index:Int, value:Int):Int {
-        ensureLength(index + 1);
-        this._data.set(index, value);
-        return value;
-    }
-
-    public function get(index:Int):Int {
-        ensureLength(index + 1);
-        return this._data.get(index) & 0xFF;
     }
 
     public function writeUTF(str:String) {
@@ -357,18 +350,8 @@ class ByteArrayData implements IDataOutput implements IDataInput {
         return this._position;
     }
 
-    private function get_length():Int {
-        return this._length;
-    }
-
     private function set_position(value:Int):Int {
         return _position = value;
-    }
-
-    private function set_length(value:Int):Int {
-        ensureLength(value);
-        if (this._position > value) this._position = value;
-        return this._length = value;
     }
 
     private function get_bytesAvailable():Int {
@@ -397,3 +380,4 @@ class ByteArrayData implements IDataOutput implements IDataInput {
         return out;
     }
 }
+#end

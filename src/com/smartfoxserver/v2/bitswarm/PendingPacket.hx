@@ -1,7 +1,13 @@
 package com.smartfoxserver.v2.bitswarm;
 
 import com.smartfoxserver.v2.core.PacketHeader;
+#if flash
+import flash.utils.Endian;
+#elseif openfl
+import openfl.utils.Endian;
+#else
 import com.hurlant.util.Endian;
+#end
 
 import com.smartfoxserver.v2.util.ByteArray;
 

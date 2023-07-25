@@ -1,7 +1,13 @@
 package com.smartfoxserver.v2.bitswarm.bbox;
 
 //import com.hurlant.util.Base64;
+#if flash
+import flash.utils.Endian;
+#elseif openfl
+import openfl.utils.Endian;
+#else
 import com.hurlant.util.Endian;
+#end
 import com.smartfoxserver.v2.events.Event;
 import com.smartfoxserver.v2.events.EventDispatcher;
 import com.smartfoxserver.v2.util.ByteArray;
@@ -258,7 +264,7 @@ class BBClient extends EventDispatcher
 		if(byteArray==null)
 			data = BB_NULL;
 		else
-			data = Base64.encode(byteArray.getBytes());
+			data = Base64.encode(cast byteArray);
 
 		encoded +=(_sessId==null ? BB_NULL:_sessId)+ SEP + cmd + SEP + data;
 		return encoded;

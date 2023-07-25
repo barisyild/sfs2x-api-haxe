@@ -13,7 +13,14 @@ import com.smartfoxserver.v2.logging.Logger;
 import com.smartfoxserver.v2.protocol.IProtocolCodec;
 import com.smartfoxserver.v2.protocol.serialization.DefaultObjectDumpFormatter;
 import com.smartfoxserver.v2.protocol.serialization.DefaultSFSDataSerializer;
+#if flash
+import flash.utils.Endian;
+#elseif openfl
+import openfl.utils.Endian;
+#else
 import com.hurlant.util.Endian;
+#end
+
 
 import com.smartfoxserver.v2.errors.IOError;
 import com.smartfoxserver.v2.util.ByteArray;
