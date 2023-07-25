@@ -16,5 +16,6 @@ jobs:
         run: |
           haxelib install haxe-crypto 0.0.7
           haxelib install colyseus-websocket 1.0.12
+          haxelib install hxjava
       - name: Build libraries
         run: haxe build.hxml
