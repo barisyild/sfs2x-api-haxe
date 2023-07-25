@@ -16,12 +16,19 @@ import com.smartfoxserver.v2.events.Event;
 import com.smartfoxserver.v2.events.EventDispatcher;
 import com.smartfoxserver.v2.events.IOErrorEvent;
 import com.smartfoxserver.v2.util.ByteArray;
+#if flash
+import flash.utils.Endian;
+#elseif openfl
+import openfl.utils.Endian;
+#else
+import com.hurlant.util.Endian;
+#end
 
 /** @private */
-class BitSwarmClient extends EventDispatcher 
+class BitSwarmClient extends EventDispatcher
 {
 	#if !js
-	private var _socketClient:com.smartfoxserver.v2.bitswarm.socket.SocketClient;
+	private var _socket:com.smartfoxserver.v2.bitswarm.socket.SocketClient;
 	#end
 	private var _wsClient:WSClient;
 	private var _bbClient:BBClient;
@@ -47,58 +54,58 @@ class BitSwarmClient extends EventDispatcher
 	private var _connectionMode:String;
 	private var _firstReconnAttempt:Float=-1;
 	private var _reconnCounter:Int=1;
-		
+
 	public function new(sfs:SmartFox=null)
 	{
 		super();
-		
+
 		_controllers = new Map<Int,IController>();
 		_sfs = sfs;
 		_connected = false;
 		_udpManager = new DefaultUDPManager(sfs);
 	}
-	
+
 	public var sfs(get, null):SmartFox;
 
 	public var connected(get, null):Bool;
-	
+
 	public var connectionMode(get, never):String;
 	private function get_connectionMode():String
 	{
 		return _connectionMode;
 	}
-	
+
 	public var ioHandler(get, set):IoHandler;
  	private function get_ioHandler():IoHandler
 	{
 		return _ioHandler;
 	}
-	
+
 	private function set_ioHandler(value:IoHandler):IoHandler
 	{
 		//if(_ioHandler !=null)
-			//throw new SFSError("IOHandler is already set!")
-			
+		//throw new SFSError("IOHandler is already set!")
+
 		return _ioHandler = value;
 	}
-	
+
 	public var maxMessageSize(get, set):Int;
- 	private function get_maxMessageSize():Int
+	private function get_maxMessageSize():Int
 	{
 		return _maxMessageSize;
 	}
-	
+
 	private function set_maxMessageSize(value:Int):Int
 	{
 		return _maxMessageSize = value;
 	}
-	
+
 	public var compressionThreshold(get, set):Int;
- 	private function get_compressionThreshold():Int
+	private function get_compressionThreshold():Int
 	{
 		return _compressionThreshold;
 	}
-	
+
 	/*
 	* Avoid compressing data whose size is<100 bytes
 	* Ideal default value should be 300 bytes or more...
@@ -110,9 +117,9 @@ class BitSwarmClient extends EventDispatcher
 		else
 			throw new ArgumentError("Compression threshold cannot be<100 bytes.");
 	}
-	
+
 	public var reconnectionDelayMillis(get, set):Int;
- 	private function get_reconnectionDelayMillis():Int
+	private function get_reconnectionDelayMillis():Int
 	{
 		return _reconnectionDelayMillis;
 	}
@@ -133,13 +140,13 @@ class BitSwarmClient extends EventDispatcher
 	{
 		return _useWebSocket = value;
 	}
-	
+
 	public var useBlueBox(get, never):Bool;
- 	private function get_useBlueBox():Bool
+	private function get_useBlueBox():Bool
 	{
-		return _useBlueBox;	
+		return _useBlueBox;
 	}
-	
+
 	public function forceBlueBox(value:Bool):Void
 	{
 		if(!connected)
@@ -147,17 +154,17 @@ class BitSwarmClient extends EventDispatcher
 		else
 			throw "You can't change the BlueBox mode while the connection is running";
 	}
-	
+
 	private function set_reconnectionDelayMillis(millis:Int):Int
 	{
 		return _reconnectionDelayMillis = millis;
 	}
-	
+
 	public function enableBBoxDebug(value:Bool):Void
 	{
 		_bbClient.isDebug = value;
 	}
-	
+
 	public function init():Void
 	{
 		// Do it once
@@ -168,18 +175,18 @@ class BitSwarmClient extends EventDispatcher
 		}
 
 		#if !js
-		_socketClient = new com.smartfoxserver.v2.bitswarm.socket.SocketClient();
-		
+		_socket = new com.smartfoxserver.v2.bitswarm.socket.SocketClient();
+
 		//if(_socketClient.hasOwnProperty("timeout"))// condition required to avoide FP<10.0 to throw an error at runtime
 			//_socketClient.timeout = 5000;
 
-		_socketClient.addEventListener(SocketEvent.CONNECT, onSocketConnect);
-		_socketClient.addEventListener(SocketEvent.DATA, onSocketData);
-		_socketClient.addEventListener(SocketEvent.CLOSED, onSocketClose);
-		_socketClient.addEventListener(SocketEvent.IO_ERROR, onSocketIOError);
-		_socketClient.addEventListener(SocketEvent.SECURITY_ERROR, onSocketSecurityError);
+		_socket.addEventListener(SocketEvent.CONNECT, onSocketConnect);
+		_socket.addEventListener(SocketEvent.DATA, onSocketData);
+		_socket.addEventListener(SocketEvent.CLOSED, onSocketClose);
+		_socket.addEventListener(SocketEvent.IO_ERROR, onSocketIOError);
+		_socket.addEventListener(SocketEvent.SECURITY_ERROR, onSocketSecurityError);
 		#end
-			
+
 		_bbClient = new BBClient();
 		_bbClient.addEventListener(BBEvent.CONNECT, onBBConnect);
 		_bbClient.addEventListener(BBEvent.DATA, onBBData);
@@ -192,17 +199,12 @@ class BitSwarmClient extends EventDispatcher
 		_wsClient.addEventListener(WSEvent.DATA, this.onWSData);
 		_wsClient.addEventListener(WSEvent.CLOSED, this.onWSClosed);
 		_wsClient.addEventListener(WSEvent.IO_ERROR, this.onWSError);
-		_wsClient.addEventListener(WSEvent.SECURITY_ERROR, this.onWSError);
+		_wsClient.addEventListener(WSEvent.SECURITY_ERROR, this.onWSSecurityError);
 	}
 
 	private function onWSConnect(evt : WSEvent) : Void
 	{
-		this._connected = true;
-		var event : BitSwarmEvent = new BitSwarmEvent(BitSwarmEvent.CONNECT);
-		event.params = {
-			success : true
-		};
-		dispatchEvent(event);
+		processConnect();
 	}
 
 	private function onWSData(evt : WSEvent) : Void
@@ -210,81 +212,76 @@ class BitSwarmClient extends EventDispatcher
 		var buffer : ByteArray = evt.params.data;
 		if (buffer != null)
 		{
-			this._ioHandler.onDataRead(buffer);
+			processData(buffer);
 		}
 	}
 
 	private function onWSClosed(evt : WSEvent) : Void
 	{
-		_connected = false;
-
-		//TODO: Add reconnect support for WebSocket?
-		dispatchEvent(new BitSwarmEvent(BitSwarmEvent.DISCONNECT, {
-			reason : ClientDisconnectionReason.UNKNOWN
-		}));
+		processClose(false);
 	}
 
 	private function onWSError(evt : WSEvent) : Void
 	{
-		trace("## WebSocket Error: " + evt.params.message);
-		var event : BitSwarmEvent = new BitSwarmEvent(BitSwarmEvent.IO_ERROR);
-		event.params = {
-			message : evt.params.message
-		};
-		dispatchEvent(event);
+		processIOError(evt.params.message);
 	}
-	
+
+	private function onWSSecurityError(evt : WSEvent) : Void
+	{
+		processSecurityError(evt.params.message);
+	}
+
 	public function destroy():Void
 	{
 		#if !js
-		_socketClient.removeEventListener(SocketEvent.CONNECT, onSocketConnect);
-		_socketClient.removeEventListener(SocketEvent.CLOSED, onSocketClose);
-		_socketClient.removeEventListener(SocketEvent.DATA, onSocketData);
-		_socketClient.removeEventListener(SocketEvent.IO_ERROR, onSocketIOError);
-		_socketClient.removeEventListener(SocketEvent.SECURITY_ERROR, onSocketSecurityError);
-		
-		if(_socketClient.connected)
-			_socketClient.close();
+		_socket.removeEventListener(SocketEvent.CONNECT, onSocketConnect);
+		_socket.removeEventListener(SocketEvent.CLOSED, onSocketClose);
+		_socket.removeEventListener(SocketEvent.DATA, onSocketData);
+		_socket.removeEventListener(SocketEvent.IO_ERROR, onSocketIOError);
+		_socket.removeEventListener(SocketEvent.SECURITY_ERROR, onSocketSecurityError);
 
-		_socketClient = null;
+		if(_socket.connected)
+			_socket.close();
+
+		_socket = null;
 		#end
 	}
-	
+
 	public function getController(id:Int):IController
 	{
 		return _controllers.get(id);
 	}
-	
+
 	public var systemController(get, null):SystemController;
- 	private function get_systemController():SystemController
+	private function get_systemController():SystemController
 	{
 		return _sysController;
 	}
-	
+
 	public var extensionController(get, null):ExtensionController;
- 	private function get_extensionController():ExtensionController
+	private function get_extensionController():ExtensionController
 	{
 		return _extController;
 	}
-	
+
 	public var isReconnecting(get, set):Bool;
- 	private function get_isReconnecting():Bool
+	private function get_isReconnecting():Bool
 	{
 		return _attemptingReconnection;
 	}
-	
+
 	private function set_isReconnecting(value:Bool):Bool
 	{
-		return _attemptingReconnection = value;	
+		return _attemptingReconnection = value;
 	}
-	
+
 	public function getControllerById(id:Int):IController
 	{
 		return _controllers.get(id);
 	}
-	
+
 	public var connectionIp(get, null):String;
- 	private function get_connectionIp():String
+	private function get_connectionIp():String
 	{
 		if(!connected)
 			return "Not Connected";
@@ -294,32 +291,28 @@ class BitSwarmClient extends EventDispatcher
 	@:isVar
 	public var connectionPort(get, set):Int;
 
-	
+
 	private function addController(id:Int, controller:IController):Void
 	{
 		if(controller==null)
 			throw new ArgumentError("Controller is null, it can't be added.");
-		
+
 		if(_controllers.exists(id))
 			throw new ArgumentError("A controller with id:" + id + " already exists! Controller can't be added:" + controller);
-			
+
 		_controllers.set(id, controller);
 	}
-	
+
 	public function addCustomController(id:Int, controllerClass:Class<IController>):Void
 	{
 		var controller:IController = Type.createInstance(controllerClass,[this]);
 		addController(id, controller);
 	}
-	
+
 	public function connect(host:String="127.0.0.1", port:Int=9933):Void
 	{
 		_lastIpAddress = host;
 		_lastTcpPort = port;
-
-		//DEBUG
-		//_useWebSocket = false;
-		//_useBlueBox = true;
 
 		if(_useWebSocket)
 		{
@@ -329,32 +322,34 @@ class BitSwarmClient extends EventDispatcher
 		else if(_useBlueBox)
 		{
 			_bbClient.pollSpeed=(sfs.config !=null)? sfs.config.blueBoxPollingRate:750;
-			_bbClient.connect(host, port, useSSL);
+			_bbClient.connect(host, port);
 			_connectionMode = ConnectionMode.HTTP;
 		}
+		#if !js
 		else
 		{
-			#if js
-				throw "js does not support sockets.";
-			#else
-				_socketClient.connect(host, port, useSSL);
-				_connectionMode = ConnectionMode.SOCKET;
-			#end
+			_socket.connect(host, port);
+			_connectionMode = ConnectionMode.SOCKET;
 		}
+		#end
 	}
-	
+
 	public function send(message:IMessage):Void
-	{	
+	{
 		_ioHandler.codec.onPacketWrite(message);
 	}
-	
- 	//private function get_socket():Socket
+
+	#if !js
+	public var socket(get, never):com.smartfoxserver.v2.bitswarm.socket.SocketClient;
+	#end
+
+	//private function get_socket():Socket
 	//{
-		//return _socket;
+	//return _socket;
 	//}
-	
+
 	public var httpSocket(get , never):BBClient;
-	
+
 	public function get_httpSocket():BBClient
 	{
 		return _bbClient;
@@ -367,15 +362,6 @@ class BitSwarmClient extends EventDispatcher
 		return _wsClient;
 	}
 
-	#if !js
-	public var socket(get, never):com.smartfoxserver.v2.bitswarm.socket.SocketClient;
-
-	function get_socket():com.smartfoxserver.v2.bitswarm.socket.SocketClient
-	{
-		return _socketClient;
-	}
-	#end
-	
 	public function disconnect(reason:String=null):Void
 	{
 		if(_useBlueBox)
@@ -385,129 +371,145 @@ class BitSwarmClient extends EventDispatcher
 		#if !js
 		else if(socket.connected)
 		{
-			_socketClient.close();
+			_socket.close();
 		}
 		#end
 		else if(_wsClient.connected)
 		{
 			_wsClient.close();
 		}
-				
-		onSocketClose(new SocketEvent(SocketEvent.CLOSED, { reason:reason } ));
+
+		onSocketClose(new BitSwarmEvent(BitSwarmEvent.DISCONNECT, { reason:reason } ));
 	}
-	
+
 	public function nextUdpPacketId():Float
 	{
 		return _udpManager.nextUdpPacketId();
 	}
-	
+
 	/*
 	* Simulates abrupt disconnection
 	* For testing/simulations only
 	*/
 	public function killConnection():Void
 	{
-		if(_wsClient.connected)
-			_wsClient.close();
-
+		if(_useBlueBox)
+		{
+			_bbClient.close();
+		}
 		#if !js
-		if(socket.connected)
-			socket.close();
+		else if(socket.connected)
+		{
+			_socket.close();
+		}
 		#end
+		else if(_wsClient.connected)
+		{
+			_wsClient.close();
+		}
 		onSocketClose(new SocketEvent(SocketEvent.CLOSED));
 	}
-	
+
 	public function stopReconnection():Void
 	{
 		_attemptingReconnection=false;
 		_firstReconnAttempt=-1;
 
+		if(_useBlueBox)
+		{
+			_bbClient.close();
+		}
 		#if !js
-		if(_socketClient.connected)
-			_socketClient.close();
+		else if(socket.connected)
+		{
+			_socket.close();
+		}
 		#end
-		
+		else if(_wsClient.connected)
+		{
+			_wsClient.close();
+		}
+
 		executeDisconnection(null);
 	}
-	
+
 	public var udpManager(get, set):IUDPManager;
- 	private function get_udpManager():IUDPManager
+	private function get_udpManager():IUDPManager
 	{
 		return _udpManager;
 	}
-	
+
 	private function set_udpManager(manager:IUDPManager):IUDPManager
 	{
 		return _udpManager = manager;
 	}
-	
-	//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-	// Socket handlers
-	//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 	private function initControllers():Void
 	{
 		_sysController = new SystemController(this);
 		_extController = new ExtensionController(this);
-		
+
 		addController(0, _sysController);
 		addController(1, _extController);
 	}
-	
+
 	public var reconnectionSeconds(get, set):Int;
- 	private function get_reconnectionSeconds():Int
+	private function get_reconnectionSeconds():Int
 	{
 		return _reconnectionSeconds;
 	}
-	
+
 	private function set_reconnectionSeconds(seconds:Int):Int
 	{
 		if(seconds<0)
 			return _reconnectionSeconds = 0;
 		else
-			return _reconnectionSeconds = seconds;	
+			return _reconnectionSeconds = seconds;
 	}
-	
+
 	//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-	// Socket handlers
+	// Handler processes
 	//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-	private function onSocketConnect(evt:SocketEvent):Void
+
+	private function processConnect():Void
 	{
 		_connected = true;
-		
+
 		var event:BitSwarmEvent = new BitSwarmEvent(BitSwarmEvent.CONNECT);
-		
-		// 2nd argument not publicly documented, used Internally
-		event.params = { success:true, _isReconnection:_attemptingReconnection } ; 
-		
+
+		event.params = {
+			success: true,
+			_isReconnection: _attemptingReconnection // internal
+		};
+
 		dispatchEvent(event);
 	}
-	
-	private function onSocketClose(evt:SocketEvent):Void
+
+	private function processClose(manual:Bool, ?evt:BitSwarmEvent):Void
 	{
 		// Connection is off
 		_connected = false;
-		
-		var isRegularDisconnection:Bool = !_attemptingReconnection && sfs.getReconnectionSeconds() == 0;
-		var isManualDisconnection:Bool = (Std.isOfType(evt, SocketEvent)) && cast(evt,SocketEvent).params.reason == ClientDisconnectionReason.MANUAL;
 
-		if(isRegularDisconnection || isManualDisconnection)
+		var isRegularDisconnection:Bool = !_attemptingReconnection && sfs.getReconnectionSeconds() == 0;
+
+		if(isRegularDisconnection || manual)
 		{
 			// Reset UDP Manager
 			_udpManager.reset();
 			_firstReconnAttempt=-1;
-			
-			executeDisconnection(evt);					
+
+			executeDisconnection(evt);
 			return;
 		}
-		
-		// Already trying to reconnect...
+
+			// Already trying to reconnect...
 		else if(_attemptingReconnection)
 			reconnect();
-		
-		// First reconnection attempt
+
+			// First reconnection attempt
 		else
 		{
-		
+
 			/*
 			* If we aren't in any of the above three cases then it's time to attempt a
 			* reconnection to the server.
@@ -515,23 +517,23 @@ class BitSwarmClient extends EventDispatcher
 			_attemptingReconnection = true;
 			_firstReconnAttempt=haxe.Timer.stamp();
 			_reconnCounter=1;
-				
+
 			// Fire event and retry
 			dispatchEvent(new BitSwarmEvent(BitSwarmEvent.RECONNECTION_TRY));
-			
+
 			reconnect();
 		}
 	}
-	
+
 	private function reconnect():Void
 	{
 		if(!_attemptingReconnection)
 			return;
-		
+
 		var reconnectionSeconds:Int=sfs.getReconnectionSeconds()* 1000;
 		var now:Float=haxe.Timer.stamp();
 		var timeLeft:Float=(_firstReconnAttempt + reconnectionSeconds)- now;
-		
+
 		if(timeLeft>0)
 		{
 			sfs.logger.info('Reconnection attempt:$_reconnCounter - time left: ${Std.int(timeLeft/1000)}sec.');
@@ -540,14 +542,14 @@ class BitSwarmClient extends EventDispatcher
 			haxe.Timer.delay(function():Void { connect(_lastIpAddress, _lastTcpPort); }, _reconnectionDelayMillis);
 			_reconnCounter++;
 		}
-		
+
 		// We are out of time... connection failed:(
 		else
 		{
 			dispatchEvent(new BitSwarmEvent(BitSwarmEvent.DISCONNECT, {reason:ClientDisconnectionReason.UNKNOWN}));
 		}
 	}
-	
+
 	private function executeDisconnection(evt:Event):Void
 	{
 		/*
@@ -556,47 +558,47 @@ class BitSwarmClient extends EventDispatcher
 		*/
 		if(Std.isOfType(evt, BitSwarmEvent))
 			dispatchEvent(evt);
-			
+
 			/*
 			* Disconnection at socket level
 			*/
 		else
 			dispatchEvent(new BitSwarmEvent(BitSwarmEvent.DISCONNECT, { reason:ClientDisconnectionReason.UNKNOWN } ));
 	}
-	
-	private function onSocketData(evt:SocketEvent):Void
+
+	/**
+	@param buffer - Big endian byte array.
+	*/
+	private function processData(buffer:ByteArray):Void
 	{
-		var buffer:ByteArray = evt.params.data;
-		try
-		{
+		try {
 			_ioHandler.onDataRead(buffer);
-		}
-		catch(error:Dynamic)
-		{
-			try{
-			trace("## SocketDataError:" + error + " " + error.message);
-			trace(haxe.CallStack.toString( haxe.CallStack.exceptionStack()));
-			trace(buffer.toString());
-			var event:BitSwarmEvent = new BitSwarmEvent(BitSwarmEvent.DATA_ERROR);
-			event.params = { message:error.message, details:error.details };
-			
-			dispatchEvent(event);
-			}catch (e:Dynamic){
+		} catch(error:Dynamic) {
+			try {
+				trace("## SocketDataError:" + error + " " + error.message);
+				trace(haxe.CallStack.toString( haxe.CallStack.exceptionStack()));
+				trace(buffer.toString());
+				var event:BitSwarmEvent = new BitSwarmEvent(BitSwarmEvent.DATA_ERROR);
+				event.params = { message:error.message, details:error.details };
+				dispatchEvent(event);
+			} catch (e:Dynamic) {
 				trace(e);
 			}
 		}
 	}
-	
-	private function onSocketIOError(evt:SocketEvent):Void
+
+	private function processIOError(error:String):Void
 	{
-		trace("## SocketError:" + evt.toString());
+		trace("## SocketError:" + error);
 		var event:BitSwarmEvent = new BitSwarmEvent(BitSwarmEvent.IO_ERROR);
-		event.params = { message:evt.toString() };
-		
+		event.params = {
+			message: error
+		};
+
 		dispatchEvent(event);
 	}
-	
-	private function onSocketSecurityError(evt:SocketEvent):Void
+
+	private function processSecurityError(error:String):Void
 	{
 		// Reconnection failure
 		if(_attemptingReconnection)
@@ -604,88 +606,130 @@ class BitSwarmClient extends EventDispatcher
 			reconnect();
 			return;
 		}
-		
-		trace("## SecurityError:" + evt.toString());
+
+		trace("## SecurityError:" + error);
 		var event:BitSwarmEvent = new BitSwarmEvent(BitSwarmEvent.SECURITY_ERROR);
-		event.params = { message:evt.params.text };
-		
+		event.params = {
+			message: error
+		};
+
 		dispatchEvent(event);
 	}
-	
-	
+
+	//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	// Socket handlers
+	//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	private function onSocketConnect(evt:SocketEvent):Void
+	{
+		processConnect();
+	}
+
+	private function onSocketClose(evt:Dynamic):Void
+	{
+		if (Std.isOfType(evt, BitSwarmEvent)) {
+			var evt : BitSwarmEvent = cast evt;
+			processClose(evt.params.reason == ClientDisconnectionReason.MANUAL, evt);
+		} else {
+			processClose(false);
+		}
+	}
+
+
+	private function onSocketData(evt:SocketEvent):Void
+	{
+		var buffer:ByteArray = evt.params.data;
+		processData(buffer);
+	}
+
+	private function onSocketIOError(evt:SocketEvent):Void
+	{
+		processIOError(evt.toString());
+	}
+
+	private function onSocketSecurityError(evt:SocketEvent):Void
+	{
+		processSecurityError(evt.toString());
+	}
+
 	//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	// BlueBox handlers
 	//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-	
+
 	private function onBBConnect(evt:BBEvent):Void
 	{
 		_connected = true;
-		
+
 		var event:BitSwarmEvent = new BitSwarmEvent(BitSwarmEvent.CONNECT);
 		event.params = { success:true };
-			
-		dispatchEvent(event);		
+
+		dispatchEvent(event);
 	}
-	
+
 	private function onBBData(evt:BBEvent):Void
 	{
 		var buffer:ByteArray = evt.params.data;
-		
-		if(buffer !=null)			
+
+		if(buffer !=null)
 			_ioHandler.onDataRead(buffer);
 	}
-	
+
 	private function onBBDisconnect(evt:BBEvent):Void
 	{
 		// Connection is off
 		_connected = false;
-			
+
 		// Fire event
 		dispatchEvent(new BitSwarmEvent(BitSwarmEvent.DISCONNECT, { reason:ClientDisconnectionReason.UNKNOWN } ));
 	}
-	
+
 	private function onBBError(evt:BBEvent):Void
 	{
 		trace("## BlueBox Dynamic:" + evt.params.message);
 		var event:BitSwarmEvent = new BitSwarmEvent(BitSwarmEvent.IO_ERROR);
 		event.params = { message:evt.params.message };
-		
+
 		dispatchEvent(event);
-	}		
-	
-	function get_connectionPort():Int 
+	}
+
+	function get_connectionPort():Int
 	{
 		if(!connected)
 			return -1;
 		else
 			return _lastTcpPort;
 	}
-	
-	function set_connectionPort(value:Int):Int 
+
+	function set_connectionPort(value:Int):Int
 	{
 		return connectionPort = value;
 	}
-	
-	function get_sfs():SmartFox 
+
+	function get_sfs():SmartFox
 	{
 		return _sfs;
 	}
-	
-	function get_connected():Bool 
+
+	function get_connected():Bool
 	{
 		return _connected;
 	}
-	
 
-	
-	function get_cryptoKey():CryptoKey 
+	#if !js
+	function get_socket():com.smartfoxserver.v2.bitswarm.socket.SocketClient
+	{
+		return _socket;
+	}
+	#end
+
+	function get_cryptoKey():CryptoKey
 	{
 		return cryptoKey;
 	}
-	
-	function set_cryptoKey(value:CryptoKey):CryptoKey 
+
+	function set_cryptoKey(value:CryptoKey):CryptoKey
 	{
 		return cryptoKey = value;
 	}
-	
+
 }
