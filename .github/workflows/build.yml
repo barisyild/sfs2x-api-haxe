@@ -27,7 +27,7 @@ jobs:
       - name: Zip files
         run: |
           cd bin/php
-          7z.exe a -tzip ../sfs2x.php.zip *
+          7z a -tzip ../sfs2x.php.zip *
       - uses: actions/upload-artifact@v3
         with:
           name: sfs2x.jar
