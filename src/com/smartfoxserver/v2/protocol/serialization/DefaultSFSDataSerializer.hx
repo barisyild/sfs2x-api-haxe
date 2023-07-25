@@ -321,6 +321,9 @@ class DefaultSFSDataSerializer implements ISFSDataSerializer
 			}
 			
 			decodedObject = new SFSDataWrapper(type, finalSfsObj);
+		}else if(headerByte==SFSDataType.TEXT)
+		{
+			decodedObject = binDecode_TEXT(buffer);
 		}
 		
 		// What is this typeID??
@@ -394,6 +397,9 @@ class DefaultSFSDataSerializer implements ISFSDataSerializer
 				
 			case SFSDataType.CLASS:
 				buffer=addData(buffer, object2binary(as2sfs(data)));
+
+			case SFSDataType.TEXT:
+				buffer = binEncode_TEXT(buffer, cast data);
 				
 			default:
 				throw new SFSCodecError("Unrecognized type in SFSObject serialization:" + typeId);
@@ -612,7 +618,14 @@ class DefaultSFSDataSerializer implements ISFSDataSerializer
 		}
 		
 		return new SFSDataWrapper(SFSDataType.UTF_STRING_ARRAY, array);
-	}	
+	}
+
+	private function binDecode_TEXT(buffer:ByteArray) : SFSDataWrapper
+	{
+		var size:Int = buffer.readInt();
+		var value:String = buffer.readUTFBytes(size);
+		return new SFSDataWrapper(SFSDataType.TEXT,value);
+	}
 
 	private function getTypedArraySize(buffer:ByteArray):Int
 	{
@@ -712,14 +725,14 @@ class DefaultSFSDataSerializer implements ISFSDataSerializer
 		
 		return addData(buffer, data);
 	}
-	
+
 	private function binEncode_UTF_STRING(buffer:ByteArray, value:String):ByteArray
 	{
 		var data:ByteArray = new ByteArray();
 		data.endian = Endian.BIG_ENDIAN;
 		data.writeByte(SFSDataType.UTF_STRING);
 		data.writeUTF(value);
-		
+
 		return addData(buffer, data);
 	}
 	
@@ -838,6 +851,15 @@ class DefaultSFSDataSerializer implements ISFSDataSerializer
 		}
 		
 		return addData(buffer, data);
+	}
+
+	private function binEncode_TEXT(buffer:ByteArray, value:String) : ByteArray
+	{
+		var data:ByteArray = new ByteArray();
+		data.writeByte(SFSDataType.TEXT);
+		data.writeInt(value.length);
+		data.writeUTFBytes(value);
+		return this.addData(buffer,data);
 	}
 	
 	private function encodeSFSObjectKey(buffer:ByteArray, value:String):ByteArray

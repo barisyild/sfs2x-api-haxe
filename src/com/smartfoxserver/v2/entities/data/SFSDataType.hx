@@ -130,10 +130,15 @@ class SFSDataType
 	 * A custom class.
 	 */
 	public static inline var CLASS:Int = 19;
+
+	/**
+	 * A text type.
+	 */
+	public static inline var TEXT:Int = 20;
 	
 	private static inline function TYPE_NAMES():Array<Dynamic>
 	{
-		return ["NULL" , "BOOL" , "BYTE" , "SHORT" , "INT" , "LONG" , "FLOAT" , "DOUBLE" , "UTF_STRING" , "BOOL_ARRAY" , "BYTE_ARRAY" , "SHORT_ARRAY" , "INT_ARRAY" , "LONG_ARRAY" , "FLOAT_ARRAY" , "DOUBLE_ARRAY" , "UTF_STRING_ARRAY" , "SFS_ARRAY" , "SFS_OBJECT", "CLASS"];
+		return ["NULL" , "BOOL" , "BYTE" , "SHORT" , "INT" , "LONG" , "FLOAT" , "DOUBLE" , "UTF_STRING" , "BOOL_ARRAY" , "BYTE_ARRAY" , "SHORT_ARRAY" , "INT_ARRAY" , "LONG_ARRAY" , "FLOAT_ARRAY" , "DOUBLE_ARRAY" , "UTF_STRING_ARRAY" , "SFS_ARRAY" , "SFS_OBJECT", "CLASS", "TEXT"];
 	}
 	
 	/** @private */
