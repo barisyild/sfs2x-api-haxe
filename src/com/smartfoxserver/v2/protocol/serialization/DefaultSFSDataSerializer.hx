@@ -1,5 +1,6 @@
 package com.smartfoxserver.v2.protocol.serialization;
 
+import Type.ValueType;
 import com.smartfoxserver.v2.util.ByteArray;
 /*
 #if js
@@ -1142,7 +1143,7 @@ class DefaultSFSDataSerializer implements ISFSDataSerializer
 			 * ADDENDUM:	there is a special case in which the Dynamic is actually an Array with one element as Dynamic
 			 * 				in such case an Array is recognized as Dynamic!
 			 */
-			else if((item.toString()=="[object Dynamic]" || item.toString() == "[object Object]")  && !(Std.is(item, Array)))
+			else if(Type.typeof(item) == ValueType.TObject)
 			{
 				var subSfso:ISFSObject = new SFSObject();
 				sfso.putSFSObject(key, subSfso);
@@ -1233,9 +1234,9 @@ class DefaultSFSDataSerializer implements ISFSDataSerializer
 				sfsa.addNull();
 				
 			// See notes for SFSObject
-			else if((item.toString()=="[object Dynamic]" || item.toString() == "[object Object]")  && !(Std.is(item, Array)))
+			else if(Type.typeof(item) == ValueType.TObject)
 				sfsa.addSFSObject(genericObjectToSFSObject(item, forceToNumber));
-			
+
 			else if(Std.isOfType(item, Array))
 			{
 				var subSfsa:ISFSArray = new SFSArray();
