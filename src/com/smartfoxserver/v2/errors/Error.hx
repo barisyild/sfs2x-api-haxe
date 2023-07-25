@@ -1,17 +1,16 @@
 package com.smartfoxserver.v2.errors;
-class Error {
+class Error extends haxe.Exception {
     public var errorID (default, null):Int;
-    public var message:String;
     public var name:String;
 
 
     public function new (message:String = "", id:Int = 0) {
-        this.message = message;
+        super(message);
         this.errorID = id;
-        name = "Error";
+        this.name = "Error";
     }
 
-    public function toString()
+    override public function toString()
     {
         return "[" + name + "]: " + message + " (" + errorID + ")";
     }
