@@ -87,7 +87,9 @@ class WSClient extends EventDispatcher
 			ws = null;
 		};
 
-		#if (target.threaded)
+		#if openfl
+			openfl.Lib.current.addEventListener(openfl.events.Event.ENTER_FRAME, onEnterFrame);
+		#elseif (target.threaded)
 			sys.thread.Thread.create(() -> {
 				runThread();
 			});
@@ -108,6 +110,15 @@ class WSClient extends EventDispatcher
 		}
 		trace("WebSocket thread died");
 	}
+
+	#if openfl
+	private function onEnterFrame(e:openfl.events.Event):Void
+	{
+		//trace("onEnterFrame");
+		if(ws != null)
+			ws.process();
+	}
+	#end
 
 	public function send(binData : ByteArray) : Void
 	{
