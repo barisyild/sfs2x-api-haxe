@@ -41,7 +41,7 @@ class SFSProtocolCodec implements IProtocolCodec
 		/*
 		* TCP Data provides a ByteArray
 		*/
-		if(Std.is(packet, com.smartfoxserver.v2.util.ByteArray.ByteArrayData))
+		if(Std.isOfType(packet, com.smartfoxserver.v2.util.ByteArray.ByteArrayData))
 			sfsObj = SFSObject.newFromBinaryData(packet);
 				
 		/*
