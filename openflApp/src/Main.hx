@@ -21,7 +21,7 @@ class Main extends Sprite
 	{
 		super();
 		sfs = new SmartFox(true);
-		sfs.useWebSocket = useWebSocket; //Optional for non-html5 platforms
+		sfs.useWebSocket = useWebSocket; //Optional for non-js platforms
 		sfs.useSSL = false;
 		sfs.addEventListener(SFSEvent.CONNECTION, onConnection);
 		sfs.addEventListener(SFSEvent.LOGIN, onLogin);
@@ -29,9 +29,9 @@ class Main extends Sprite
 		sfs.addEventListener(SFSEvent.PUBLIC_MESSAGE, onPublicMessage);
 		if(useWebSocket)
 		{
-			sfs.connect("127.0.0.1", sfs.useSSL ? WSS_PORT : WS_PORT);
+			sfs.connect("192.168.50.24", sfs.useSSL ? WSS_PORT : WS_PORT);
 		}else{
-			sfs.connect("127.0.0.1", SOCKET_PORT);
+			sfs.connect("192.168.50.24", SOCKET_PORT);
 		}
 	}
 
