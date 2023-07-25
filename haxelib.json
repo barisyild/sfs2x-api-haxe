@@ -2,8 +2,11 @@
     "name": "sfs2x-api-haxe",
     "license": "MIT",
     "tags": [
-        "openfl",
-        "server"
+        "haxe",
+        "port",
+        "actionscript3",
+        "smartfoxserver-2x",
+        "smartfoxserver"
     ],
     "description": "SmartFoxServer 2X client api for haxe",
     "contributors": [
