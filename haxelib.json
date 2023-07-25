@@ -7,11 +7,11 @@
     ],
     "description": "SmartFoxServer 2X client api for haxe",
     "contributors": [
-        "boorik <Vincent Blanchet>",
-		"barisyild <Baris Cagri Yildirim>"
+        "boorik",
+		"barisyild"
     ],
-    "releasenote": "new targets added.",
-    "version": "0.2.2",
+    "releasenote": "release",
+    "version": "0.0.1",
     "url": "https://github.com/barisyild/sfs2x-api-haxe",
     "dependencies": {
         "haxe-crypto":"",
