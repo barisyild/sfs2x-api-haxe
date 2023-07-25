@@ -74,17 +74,17 @@ class WSClient extends EventDispatcher
 			}));
 		};
 		ws.onclose = function(?e:Dynamic) {
-			dispatchEvent(new WSEvent(WSEvent.CLOSED, { }));
 			_connected = false;
-			ws = null;
+			dispatchEvent(new WSEvent(WSEvent.CLOSED, { }));
+			//ws = null;
 		};
 		ws.onerror = function(error:String) {
+			_connected = false;
 			var wsEvt : WSEvent = new WSEvent(WSEvent.IO_ERROR, {
 				message : error
 			});
 			dispatchEvent(wsEvt);
-			_connected = false;
-			ws = null;
+			//ws = null;
 		};
 
 		#if openfl
