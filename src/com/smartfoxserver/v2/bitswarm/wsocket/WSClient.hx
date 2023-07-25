@@ -67,7 +67,7 @@ class WSClient extends EventDispatcher
 				data: byteArray
 			}));
 		};
-		ws.onclose = function() {
+		ws.onclose = function(?e:Dynamic) {
 			dispatchEvent(new WSEvent(WSEvent.CLOSED, { }));
 			_connected = false;
 			ws = null;
