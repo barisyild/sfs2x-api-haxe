@@ -41,15 +41,17 @@ Warning:
 
 **UDP Socket Support Dropped!** (If you need udp socket feature, please open issue.)
 
+**Compression does not work on platforms other than OpenFL.**
+
 
 Currently Working With:
 ----------------------------------
 
-haxe: 4.0.5
+haxe: 4.3.1
 
 haxe-crypto: 0.0.7
 
-haxe-ws: 1.0.5
+colyseus-websocket: 1.0.12
 
 ----------------------------------
 
