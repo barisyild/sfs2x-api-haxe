@@ -13,6 +13,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: krdlab/setup-haxe@v1
       - name: Set up Haxelib dependencies
-        run: haxelib install all
+        run: |
+          haxelib install haxe-crypto 0.0.8
+          haxelib install colyseus-websocket 1.0.12
       - name: Build libraries
         run: haxe build.hxml
