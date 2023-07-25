@@ -127,6 +127,16 @@ abstract ByteArray(ByteArrayData) to ByteArrayData from ByteArrayData {
 
     @:arrayAccess public function get(index:Int):Int { return this.get(index); }
     @:arrayAccess public function set(index:Int, value:Int):Int { return this.set(index, value); }
+
+    public function uncompress():Bytes
+    {
+        throw "Decompression Not implemented";
+    }
+
+    public function compress():Bytes
+    {
+        throw "Compression Not implemented";
+    }
 }
 
 class ByteArrayData extends Bytes implements IDataOutput implements IDataInput {

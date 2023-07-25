@@ -260,9 +260,8 @@ class SFSIOHandler implements IoHandler
 				packetEncrypter.decrypt(pendingPacket.buffer);
 			
 			// Handle compression
-			/*if(pendingPacket.header.compressed)
-				pendingPacket.buffer.uncompress();*/
-				///TODO: Enable!
+			if(pendingPacket.header.compressed)
+				pendingPacket.buffer.uncompress();
 			
 			// Send to protocol codec
 			protocolCodec.onPacketRead(pendingPacket.buffer);
@@ -308,8 +307,7 @@ class SFSIOHandler implements IoHandler
 		if (cast(binData.length,Int) > bitSwarm.compressionThreshold)
 		{
 			trace("Before compression:" + binData.length);
-			//binData.compress();
-			///TODO: Enable!
+			binData.compress();
 			trace("After compression:" + binData.length);
 			isCompressed = true;
 		}	
