@@ -13,7 +13,7 @@ class SFSError extends Error
 		_details=extra;
 	}
 
-	public override function details():String
+	public function details():String
 	{
 		return _details;
 	}

@@ -277,7 +277,7 @@ class BBClient extends EventDispatcher
 			throw new ArgumentError("Unexpected Response format. Missing BlueBox header:" +(rawData.length<1024 ? rawData:"[too big data]"));
 		*/
 
-		var byteArray:ByteArray = ByteArray.fromBytes(Base64.decode(rawData));
+		var byteArray:ByteArray = #if flash @:privateAccess Base64.decode(rawData).b #else ByteArray.fromBytes(Base64.decode(rawData)) #end;
 		byteArray.endian = Endian.BIG_ENDIAN;
 		return byteArray;
 	}

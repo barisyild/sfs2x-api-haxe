@@ -67,7 +67,7 @@ class WSClient extends EventDispatcher
 			dispatchEvent(new WSEvent(WSEvent.CONNECT, {}));
 		};
 		ws.onmessageBytes = function(bytes:Bytes) {
-			var byteArray:ByteArray = ByteArray.fromBytes(bytes);
+			var byteArray:ByteArray = #if flash @:privateAccess bytes.b #else ByteArray.fromBytes(bytes) #end;
 			byteArray.endian = Endian.BIG_ENDIAN;
 			dispatchEvent(new WSEvent(WSEvent.DATA, {
 				data: byteArray
@@ -111,7 +111,7 @@ class WSClient extends EventDispatcher
 
 	public function send(binData : ByteArray) : Void
 	{
-		ws.sendBytes(binData);
+		ws.sendBytes(cast binData);
 	}
 
 	public function close() : Void

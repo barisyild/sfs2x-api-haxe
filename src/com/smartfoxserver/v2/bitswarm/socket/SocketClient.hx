@@ -37,7 +37,7 @@ class SocketClient extends EventDispatcher {
         _socket.ondata = function(bytes:Bytes)
         {
             dispatchEvent(new SocketEvent(SocketEvent.DATA, {
-                data : ByteArray.fromBytes(bytes)
+                data : #if flash @:privateAccess bytes.b #else ByteArray.fromBytes(bytes) #end
             }));
         }
         _socket.onclose = function()

@@ -347,7 +347,7 @@ import com.smartfoxserver.v2.events.Event;
 	
 	//========================================================
 	
-	#if !html5
+	#if !js
 	/**
 	 * Creates a new<em>SFSBuddyEvent</em>instance.
 	 * 

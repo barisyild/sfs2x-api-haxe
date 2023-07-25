@@ -1,6 +1,5 @@
 package com.smartfoxserver.v2.core;
 
-import haxe.io.Bytes;
 import com.smartfoxserver.v2.bitswarm.BitSwarmClient;
 import com.smartfoxserver.v2.bitswarm.IController;
 import com.smartfoxserver.v2.bitswarm.IMessage;
@@ -38,11 +37,10 @@ class SFSProtocolCodec implements IProtocolCodec
 	public function onPacketRead(packet:Dynamic):Void
 	{		
 		var sfsObj:ISFSObject = null;
-			
 		/*
 		* TCP Data provides a ByteArray
 		*/
-		if(Std.isOfType(packet, Bytes))
+		if(Std.isOfType(packet, #if flash flash.utils.ByteArray #elseif openfl haxe.io.Bytes #else ByteArrayData #end))
 			sfsObj = SFSObject.newFromBinaryData(packet);
 				
 		/*

@@ -2,7 +2,7 @@ package com.smartfoxserver.v2.protocol.serialization;
 
 import com.smartfoxserver.v2.util.ByteArray;
 /*
-#if html5
+#if js
 @native(_DataSerializer.SFSDataSerializer)
 extern class DefaultSFSDataSerializer
 {

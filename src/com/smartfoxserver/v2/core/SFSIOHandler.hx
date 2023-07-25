@@ -208,7 +208,7 @@ class SFSIOHandler implements IoHandler
 	{
 		log.debug("Handling Size fragment. Data:" + data.length);
 		
-		var remaining:Int = pendingPacket.header.bigSized ? 4 - pendingPacket.buffer.position:2 - pendingPacket.buffer.position;
+		var remaining:UInt = pendingPacket.header.bigSized ? 4 - pendingPacket.buffer.position:2 - pendingPacket.buffer.position;
 		
 		// Ok, we have enough data to finish
 		if(data.length>=remaining)
@@ -245,7 +245,7 @@ class SFSIOHandler implements IoHandler
 	private function handlePacketData(data:ByteArray):ByteArray
 	{	
 		// is there more data for the next incoming packet?
-		var remaining:Int = pendingPacket.header.expectedLen - pendingPacket.buffer.length;
+		var remaining:UInt = pendingPacket.header.expectedLen - pendingPacket.buffer.length;
 		var isThereMore:Bool = (data.length > remaining);
 		
 		log.debug("Handling Data:" + data.length + ", previous state:" + pendingPacket.buffer.length + "/" + pendingPacket.header.expectedLen);
@@ -364,7 +364,7 @@ class SFSIOHandler implements IoHandler
 		}
 		else
 		{
-			#if !html5
+			#if !js
 			if(bitSwarm.socket.connected)
 			{
 				if(message.isUDP)
@@ -382,12 +382,12 @@ class SFSIOHandler implements IoHandler
 		}
 	}
 
-	#if !html5
+	#if !js
 	private function writeTCP(message:IMessage, writeBuffer:ByteArray):Void
 	{
 		try
 		{
-			var bytes:Bytes = writeBuffer.getBytes();
+			var bytes:Bytes = #if flash Bytes.ofData(writeBuffer) #elseif openfl cast writeBuffer #else writeBuffer.getBytes() #end;
 			bitSwarm.socket.send(bytes);
 			
 			if (bitSwarm.sfs.debug)

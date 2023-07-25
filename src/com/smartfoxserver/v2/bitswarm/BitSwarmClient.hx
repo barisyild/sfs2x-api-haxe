@@ -20,7 +20,7 @@ import com.smartfoxserver.v2.util.ByteArray;
 /** @private */
 class BitSwarmClient extends EventDispatcher 
 {
-	#if !html5
+	#if !js
 	private var _socketClient:com.smartfoxserver.v2.bitswarm.socket.SocketClient;
 	#end
 	private var _wsClient:WSClient;
@@ -167,7 +167,7 @@ class BitSwarmClient extends EventDispatcher
 			_controllersInited = true;
 		}
 
-		#if !html5
+		#if !js
 		_socketClient = new com.smartfoxserver.v2.bitswarm.socket.SocketClient();
 		
 		//if(_socketClient.hasOwnProperty("timeout"))// condition required to avoide FP<10.0 to throw an error at runtime
@@ -234,7 +234,7 @@ class BitSwarmClient extends EventDispatcher
 	
 	public function destroy():Void
 	{
-		#if !html5
+		#if !js
 		_socketClient.removeEventListener(SocketEvent.CONNECT, onSocketConnect);
 		_socketClient.removeEventListener(SocketEvent.CLOSED, onSocketClose);
 		_socketClient.removeEventListener(SocketEvent.DATA, onSocketData);
@@ -332,8 +332,8 @@ class BitSwarmClient extends EventDispatcher
 		}
 		else
 		{
-			#if html5
-				throw "html5 does not support sockets.";
+			#if js
+				throw "js does not support sockets.";
 			#else
 				_socketClient.connect(host, port, useSSL);
 				_connectionMode = ConnectionMode.SOCKET;
@@ -365,7 +365,7 @@ class BitSwarmClient extends EventDispatcher
 		return _wsClient;
 	}
 
-	#if !html5
+	#if !js
 	public var socket(get, never):com.smartfoxserver.v2.bitswarm.socket.SocketClient;
 
 	function get_socket():com.smartfoxserver.v2.bitswarm.socket.SocketClient
@@ -380,7 +380,7 @@ class BitSwarmClient extends EventDispatcher
 			_bbClient.close();
 		else
 		{
-			#if !html5
+			#if !js
 			if(socket.connected)
 				_socketClient.close();
 			#end
@@ -400,7 +400,7 @@ class BitSwarmClient extends EventDispatcher
 	*/
 	public function killConnection():Void
 	{
-		#if !html5
+		#if !js
 		socket.close();
 		#end
 		onSocketClose(new SocketEvent(SocketEvent.CLOSED));
@@ -411,7 +411,7 @@ class BitSwarmClient extends EventDispatcher
 		_attemptingReconnection=false;
 		_firstReconnAttempt=-1;
 
-		#if !html5
+		#if !js
 		if(_socketClient.connected)
 			_socketClient.close();
 		#end

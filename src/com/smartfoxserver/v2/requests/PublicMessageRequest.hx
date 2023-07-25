@@ -43,7 +43,7 @@ import com.smartfoxserver.v2.entities.data.ISFSObject;
  * @see		com.smartfoxserver.v2.SmartFox#event:publicMessage publicMessage event
  * @see		RoomSettings#permissions RoomSettings.permissions
  */
-class PublicMessageRequest extends GenericMessageRequest
+@:keep class PublicMessageRequest extends GenericMessageRequest
 {
 	/**
 	 * Creates a new<em>PublicMessageRequest</em>instance.

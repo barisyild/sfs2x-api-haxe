@@ -44,6 +44,7 @@ import com.smartfoxserver.v2.util.LagMonitor;
 import com.smartfoxserver.v2.util.SFSErrorCodes;
 import com.smartfoxserver.v2.errors.ArgumentError;
 import com.smartfoxserver.v2.events.EventDispatcher;
+import com.smartfoxserver.v2.requests.PublicMessageRequest;
 
 //--------------------------------------
 //  Connection events
@@ -899,7 +900,12 @@ class SmartFox extends EventDispatcher
 	#else
 	"Unknown"
 	#end
-	;	
+	;
+
+	public static function main()
+	{
+
+	}
 	
 	/**
 	 * Creates a new<em>SmartFox</em>instance.
@@ -1365,7 +1371,7 @@ class SmartFox extends EventDispatcher
 		_bitSwarm.useWebSocket = useWebSocket;
 
 		// All fine and dandy, let's proceed with the connection
-		#if html5
+		#if js
 			_bitSwarm.useWebSocket = true;
 		#end
 
