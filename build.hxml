@@ -26,4 +26,5 @@
 
 --next
 
+-swf-version 11
 -swf bin/sfs2x.swc
