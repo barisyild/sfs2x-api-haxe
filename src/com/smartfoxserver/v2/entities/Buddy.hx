@@ -15,7 +15,7 @@ interface Buddy
 	 * 
 	 * @see		User#id
 	 */
-	@:flash.property public var id(get, null):Int;
+	@:flash.property public var id(get, never):Int;
 	
 	/**
 	 * Indicates the name of this buddy.
@@ -23,7 +23,7 @@ interface Buddy
 	 * 
 	 * @see		User#name
 	 */
-	@:flash.property var  name(get,null):String;
+	@:flash.property var  name(get,never):String;
 	
 	/**
 	 * Indicates whether this buddy is blocked in the current user's buddies list or not.
@@ -31,17 +31,17 @@ interface Buddy
 	 * 
 	 * @see 	com.smartfoxserver.v2.requests.buddylist.BlockBuddyRequest BlockBuddyRequest
 	 */
-	@:flash.property var isBlocked(get,null):Bool;
+	@:flash.property var isBlocked(get,never):Bool;
 	
 	/**
 	 * Indicates whether this buddy is online in the Buddy List system or not.
 	 */
-	@:flash.property var isOnline(get,null):Bool;
+	@:flash.property var isOnline(get,never):Bool;
 	
 	/**
 	 * Indicates whether this buddy is temporary(non-persistent)in the current user's buddies list or not.
 	 */
-	@:flash.property var isTemp(get,null):Bool;
+	@:flash.property var isTemp(get,never):Bool;
 	
 	/**
 	 * Returns the custom state of this buddy.
@@ -51,13 +51,13 @@ interface Buddy
 	 * 
 	 * @see		com.smartfoxserver.v2.entities.managers.IBuddyManager#buddyStates IBuddyManager.buddyStates
 	 */
-	@:flash.property var state(get,null):String;
+	@:flash.property var state(get,never):String;
 	
 	/**
 	 * Returns the nickname of this buddy.
 	 * If the nickname is not set,<code>null</code>is returned.
 	 */
-	@:flash.property var nickName(get,null):String;
+	@:flash.property var nickName(get,never):String;
 	
 	/**
 	 * Returns a list of<em>BuddyVariable</em>objects associated with the buddy.
@@ -65,7 +65,7 @@ interface Buddy
 	 * @see		com.smartfoxserver.v2.entities.variables.BuddyVariable BuddyVariable
 	 * @see		#getVariable()
 	 */
-	@:flash.property var variables(get,null):Array<BuddyVariable>;
+	@:flash.property var variables(get,never):Array<BuddyVariable>;
 	
 	/**
 	 * Retrieves a Buddy Variable from its name.

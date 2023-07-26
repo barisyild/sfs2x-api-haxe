@@ -78,7 +78,7 @@ interface IUserManager
 	/**
 	 * Returns the total number of users in the local users list.
 	 */
-	@:flash.property var userCount(get, null):Int;
+	@:flash.property var userCount(get, never):Int;
 	//function get userCount():Int
 	
 	/**
@@ -89,6 +89,6 @@ interface IUserManager
 	function getUserList():Array<User>;
 	
 	/** @private */
-	@:flash.property var smartFox(get, null):SmartFox;
+	@:flash.property var smartFox(get, never):SmartFox;
 	//function get smartFox():SmartFox
 }

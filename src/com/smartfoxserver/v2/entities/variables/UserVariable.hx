@@ -13,14 +13,14 @@ interface UserVariable
 	/**
 	 * Indicates the name of this variable.
 	 */
-	@:flash.property var name(get, null):String;
+	@:flash.property var name(get, never):String;
 	//function get_name():String;
 	
 	/**
 	 * Indicates the type of this variable.
 	 * Possible types are:<code>Null</code>,<code>Bool</code>,<code>Int</code>,<code>Double</code>,<code>String</code>,<code>Object</code>,<code>Array</code>.
 	 */
-	@:flash.property var type(get, null):String;
+	@:flash.property var type(get, never):String;
 	//function get_type():String;
 	
 	/**

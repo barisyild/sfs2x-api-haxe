@@ -26,25 +26,25 @@ interface Invitation
 	/** 
 	 * Returns the<em>User</em>object corresponding to the user who sent the invitation. 
 	 */
-	var inviter(get, null):User;
+	var inviter(get, never):User;
 	//function get inviter():User
 	
 	/** 
 	 * Returns the<em>User</em>object corresponding to the user who received the invitation. 
 	 */
-	var invitee(get, null):User;
+	var invitee(get, never):User;
 	//function get invitee():User
 	
 	/** 
 	 * Returns the number of seconds available to the invitee to reply to the invitation, after which the invitation expires.
 	 */
-	var secondsForAnswer(get, null):Int;
+	var secondsForAnswer(get, never):Int;
 	//function get secondsForAnswer():Int
 	
 	/** 
 	 * Returns an instance of<em>SFSObject</em>containing a custom set of parameters.
 	 * It usually stores invitation details, like a message to the invitee and any other relevant data. 
 	 */
-	var params(get, null):ISFSObject;
+	var params(get, never):ISFSObject;
 	//function get params():ISFSObject
 }

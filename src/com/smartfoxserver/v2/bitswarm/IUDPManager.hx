@@ -9,7 +9,7 @@ import com.smartfoxserver.v2.util.ByteArray;
 interface IUDPManager
 {
 	function initialize(udpAddr:String, udpPort:Int):Void;
-	@:flash.property var inited(get,null):Bool;
+	@:flash.property var inited(get,never):Bool;
 	@:flash.property var sfs(get,set):SmartFox;
 	function nextUdpPacketId():Float;
 	function send(binaryData:ByteArray):Void;

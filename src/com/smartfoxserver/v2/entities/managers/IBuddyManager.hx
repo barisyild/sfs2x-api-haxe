@@ -21,7 +21,7 @@ interface IBuddyManager
 	 * 
 	 * @see com.smartfoxserver.v2.requests.buddylist.InitBuddyListRequest InitBuddyListRequest
 	 */
-	@:flash.property var isInited(get, null):Bool;
+	@:flash.property var isInited(get, never):Bool;
 	//function get isInited():Bool
 	
 	/** @private */
@@ -91,7 +91,7 @@ interface IBuddyManager
 	 * 
 	 * @see		com.smartfoxserver.v2.entities.Buddy#isOnline Buddy.isOnline
 	 */
-	@:flash.property var offlineBuddies(get, null):Array<Buddy>;
+	@:flash.property var offlineBuddies(get, never):Array<Buddy>;
 	//function get offlineBuddies():Array
 	
 	/**
@@ -99,7 +99,7 @@ interface IBuddyManager
 	 * 
 	 * @see		com.smartfoxserver.v2.entities.Buddy#isOnline Buddy.isOnline
 	 */
-	@:flash.property var  onlineBuddies(get, null):Array<Buddy>;
+	@:flash.property var  onlineBuddies(get, never):Array<Buddy>;
 	
 	/**
 	 * Returns a list of<em>Buddy</em>objects representing all the buddies in the user's buddies list.
@@ -107,7 +107,7 @@ interface IBuddyManager
 	 * 
 	 * @see #isInited
 	 */
-	@:flash.property var buddyList(get, null):Array<Buddy>;
+	@:flash.property var buddyList(get, never):Array<Buddy>;
 	//function get buddyList():Array
 	
 	/**
@@ -117,7 +117,7 @@ interface IBuddyManager
 	 * @see		com.smartfoxserver.v2.entities.Buddy#state Buddy.state
 	 */
 	//function get buddyStates():Array
-	@:flash.property var buddyStates(get, null):Array<String>;
+	@:flash.property var buddyStates(get, never):Array<String>;
 	
 	/**
 	 * Retrieves a Buddy Variable from its name.
@@ -137,7 +137,7 @@ interface IBuddyManager
 	 * @see		com.smartfoxserver.v2.entities.variables.BuddyVariable BuddyVariable
 	 * @see		#getMyVariable()
 	 */
-	@:flash.property var myVariables(get, null):Array<BuddyVariable>;
+	@:flash.property var myVariables(get, never):Array<BuddyVariable>;
 	//function get myVariables():Array
 	
 	/**
@@ -150,7 +150,7 @@ interface IBuddyManager
 	 * @see		com.smartfoxserver.v2.entities.variables.ReservedBuddyVariables ReservedBuddyVariables
 	 * @see 	com.smartfoxserver.v2.requests.buddylist.GoOnlineRequest GoOnlineRequest
 	 */
-	@:flash.property var myOnlineState(get, null):Bool;
+	@:flash.property var myOnlineState(get, never):Bool;
 	//function get myOnlineState():Bool
 	
 	/**
@@ -163,7 +163,7 @@ interface IBuddyManager
 	 * @see		com.smartfoxserver.v2.entities.variables.ReservedBuddyVariables ReservedBuddyVariables
 	 * @see 	com.smartfoxserver.v2.requests.buddylist.SetBuddyVariablesRequest SetBuddyVariablesRequest
 	 */
-	var myNickName(get, null):String;
+	var myNickName(get, never):String;
 	//function get myNickName():String
 	
 	/**
@@ -176,7 +176,7 @@ interface IBuddyManager
 	 * @see		com.smartfoxserver.v2.entities.variables.ReservedBuddyVariables ReservedBuddyVariables
 	 * @see 	com.smartfoxserver.v2.requests.buddylist.SetBuddyVariablesRequest SetBuddyVariablesRequest
 	 */
-	@:flash.property var myState(get, null):String;
+	@:flash.property var myState(get, never):String;
 	//function get myState():String
 	
 	/** @private */
