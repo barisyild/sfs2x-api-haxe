@@ -1,30 +1,41 @@
--lib haxe-crypto
 -lib colyseus-websocket
 --class-path src
 -main com.smartfoxserver.v2.SmartFox
 
 --each
 
+-swf-version 11
+-swf bin/sfs2x.swc
+--swf-lib-extern swc/as3crypto.swc
+
+--next
+
+-swf-version 11
+-swf bin/sfs2x_full.swc
+--swf-lib swc/as3crypto.swc
+
+--next
+
 -python bin/sfs2x.py
+-lib haxe-crypto
 
 --next
 
 -php bin/php
+-lib haxe-crypto
 
 --next
 
 -js bin/sfs2x.js
 -D js-es=6
+-lib haxe-crypto
 
 --next
 
 --jvm bin/sfs2x.jar
+-lib haxe-crypto
 
 --next
 
 -lua bin/sfs2x.lua
-
---next
-
--swf-version 11
--swf bin/sfs2x.swc
+-lib haxe-crypto
