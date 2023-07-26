@@ -13,10 +13,10 @@
 		"barisyild"
     ],
     "releasenote": "release",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "url": "https://github.com/barisyild/sfs2x-api-haxe",
     "dependencies": {
-        "haxe-crypto":"",
+        "haxe-crypto":"0.0.7",
         "colyseus-websocket":""
     },
     "classPath": "src/"
