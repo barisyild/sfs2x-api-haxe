@@ -46,7 +46,7 @@ class RoomSettings
 	/**
 	 * Defines the name of the Room.
 	 */
-	public var name(get, set):String;
+	@:flash.property public var name(get, set):String;
  	private function get_name():String 
 	{ 
 		return _name;
@@ -64,7 +64,7 @@ class RoomSettings
 	 * 
 	 *<p>The default value is an empty string.</p>
 	 */
-	public var password(get, set):String;
+	@:flash.property public var password(get, set):String;
  	private function get_password():String 
 	{ 
 		return _password;
@@ -81,7 +81,7 @@ class RoomSettings
 	 * 
 	 * @default	false
 	 */
-	public var isGame(get, set):Bool;
+	@:flash.property public var isGame(get, set):Bool;
  	private function get_isGame():Bool 
 	{ 
 		return _isGame;
@@ -101,7 +101,7 @@ class RoomSettings
 	 * 
 	 * @see		#maxSpectators
 	 */
-	public var maxUsers(get, set):Int;
+	@:flash.property public var maxUsers(get, set):Int;
  	private function get_maxUsers():Int 
 	{ 
 		return _maxUsers;
@@ -118,7 +118,7 @@ class RoomSettings
 	 * 
 	 * @default	5
 	 */
-	public var maxVariables(get, set):Int;
+	@:flash.property public var maxVariables(get, set):Int;
  	private function get_maxVariables():Int 
 	{ 
 		return _maxVariables;
@@ -137,7 +137,7 @@ class RoomSettings
 	 * 
 	 * @see		#maxUsers
 	 */
-	public var maxSpectators(get, set):Int;
+	@:flash.property public var maxSpectators(get, set):Int;
  	private function get_maxSpectators():Int 
 	{ 
 		return _maxSpectators;
@@ -156,7 +156,7 @@ class RoomSettings
 	 * 
 	 * @see		com.smartfoxserver.v2.entities.variables.RoomVariable RoomVariable
 	 */
-	public var variables(get, set):Array<RoomVariable>;
+	@:flash.property public var variables(get, set):Array<RoomVariable>;
  	private function get_variables():Array<RoomVariable>
 	{ 
 		return _variables;
@@ -175,8 +175,8 @@ class RoomSettings
 	 * If set to<code>null</code>, the permissions configured on the server-side are used(see the SmartFoxServer 2X Administration Tool documentation).</p>
 	 * 
 	 * @default	null
-	 */ 
-	public var permissions(get, set):RoomPermissions;
+	 */
+	@:flash.property public var permissions(get, set):RoomPermissions;
  	private function get_permissions():RoomPermissions 
 	{ 
 		return _permissions;
@@ -195,8 +195,8 @@ class RoomSettings
 	 * If set to<code>null</code>, the events configured on the server-side are used(see the SmartFoxServer 2X Administration Tool documentation).</p>
 	 * 
 	 * @default	null
-	 */ 
-	public var events(get, set):RoomEvents;
+	 */
+	@:flash.property public var events(get, set):RoomEvents;
  	private function get_events():RoomEvents 
 	{ 
 		return _events;
@@ -211,7 +211,7 @@ class RoomSettings
 	/**
 	 * Defines the Extension that must be attached to the Room on the server-side, and its settings.
 	 */
-	public var extension(get, set):RoomExtension;
+	@:flash.property public var extension(get, set):RoomExtension;
  	private function get_extension():RoomExtension
 	{
 		return _extension;
@@ -230,8 +230,8 @@ class RoomSettings
 	 * @default default
 	 * 
 	 * @see com.smartfoxserver.v2.entities.Room#groupId
-	 */	
-	public var groupId(get, set):String;
+	 */
+	@:flash.property public var groupId(get, set):String;
  	private function get_groupId():String
 	{
 		return _groupId;

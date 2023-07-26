@@ -106,8 +106,8 @@ class SFSProtocolCodec implements IProtocolCodec
 		
 		return sfsObj;
 	}
-	
-	public var ioHandler(get, set):IoHandler;
+
+	@:flash.property public var ioHandler(get, set):IoHandler;
  	private function get_ioHandler():IoHandler
 	{
 		return _ioHandler;

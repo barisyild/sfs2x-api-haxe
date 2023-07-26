@@ -48,7 +48,7 @@ class BitSwarmClient extends EventDispatcher
 	private var _udpManager:IUDPManager;
 	private var _controllersInited:Bool = false;
 	@:isVar
-	public var cryptoKey(get, set):CryptoKey;
+	@:flash.property public var cryptoKey(get, set):CryptoKey;
 	private var _useWebSocket:Bool = false;
 	private var _useBlueBox:Bool = false;
 	private var _connectionMode:String;
@@ -65,17 +65,17 @@ class BitSwarmClient extends EventDispatcher
 		_udpManager = new DefaultUDPManager(sfs);
 	}
 
-	public var sfs(get, null):SmartFox;
+	@:flash.property public var sfs(get, null):SmartFox;
 
-	public var connected(get, null):Bool;
+	@:flash.property public var connected(get, null):Bool;
 
-	public var connectionMode(get, never):String;
+	@:flash.property public var connectionMode(get, never):String;
 	private function get_connectionMode():String
 	{
 		return _connectionMode;
 	}
 
-	public var ioHandler(get, set):IoHandler;
+	@:flash.property public var ioHandler(get, set):IoHandler;
  	private function get_ioHandler():IoHandler
 	{
 		return _ioHandler;
@@ -89,7 +89,7 @@ class BitSwarmClient extends EventDispatcher
 		return _ioHandler = value;
 	}
 
-	public var maxMessageSize(get, set):Int;
+	@:flash.property public var maxMessageSize(get, set):Int;
 	private function get_maxMessageSize():Int
 	{
 		return _maxMessageSize;
@@ -100,7 +100,7 @@ class BitSwarmClient extends EventDispatcher
 		return _maxMessageSize = value;
 	}
 
-	public var compressionThreshold(get, set):Int;
+	@:flash.property public var compressionThreshold(get, set):Int;
 	private function get_compressionThreshold():Int
 	{
 		return _compressionThreshold;
@@ -118,19 +118,19 @@ class BitSwarmClient extends EventDispatcher
 			throw new ArgumentError("Compression threshold cannot be<100 bytes.");
 	}
 
-	public var reconnectionDelayMillis(get, set):Int;
+	@:flash.property public var reconnectionDelayMillis(get, set):Int;
 	private function get_reconnectionDelayMillis():Int
 	{
 		return _reconnectionDelayMillis;
 	}
 
-	public var useSSL(get, never):Bool;
+	@:flash.property public var useSSL(get, never):Bool;
 	private function get_useSSL():Bool
 	{
 		return sfs.useSSL;
 	}
 
-	public var useWebSocket(get, set):Bool;
+	@:flash.property public var useWebSocket(get, set):Bool;
 	private function get_useWebSocket():Bool
 	{
 		return _useWebSocket;
@@ -141,7 +141,7 @@ class BitSwarmClient extends EventDispatcher
 		return _useWebSocket = value;
 	}
 
-	public var useBlueBox(get, never):Bool;
+	@:flash.property public var useBlueBox(get, never):Bool;
 	private function get_useBlueBox():Bool
 	{
 		return _useBlueBox;
@@ -252,19 +252,19 @@ class BitSwarmClient extends EventDispatcher
 		return _controllers.get(id);
 	}
 
-	public var systemController(get, null):SystemController;
+	@:flash.property public var systemController(get, null):SystemController;
 	private function get_systemController():SystemController
 	{
 		return _sysController;
 	}
 
-	public var extensionController(get, null):ExtensionController;
+	@:flash.property public var extensionController(get, null):ExtensionController;
 	private function get_extensionController():ExtensionController
 	{
 		return _extController;
 	}
 
-	public var isReconnecting(get, set):Bool;
+	@:flash.property public var isReconnecting(get, set):Bool;
 	private function get_isReconnecting():Bool
 	{
 		return _attemptingReconnection;
@@ -280,7 +280,7 @@ class BitSwarmClient extends EventDispatcher
 		return _controllers.get(id);
 	}
 
-	public var connectionIp(get, null):String;
+	@:flash.property public var connectionIp(get, null):String;
 	private function get_connectionIp():String
 	{
 		if(!connected)
@@ -289,7 +289,7 @@ class BitSwarmClient extends EventDispatcher
 			return _lastIpAddress;
 	}
 	@:isVar
-	public var connectionPort(get, set):Int;
+	@:flash.property public var connectionPort(get, set):Int;
 
 
 	private function addController(id:Int, controller:IController):Void
@@ -340,7 +340,7 @@ class BitSwarmClient extends EventDispatcher
 	}
 
 	#if !js
-	public var socket(get, never):com.smartfoxserver.v2.bitswarm.socket.SocketClient;
+	@:flash.property public var socket(get, never):com.smartfoxserver.v2.bitswarm.socket.SocketClient;
 	#end
 
 	//private function get_socket():Socket
@@ -348,14 +348,14 @@ class BitSwarmClient extends EventDispatcher
 	//return _socket;
 	//}
 
-	public var httpSocket(get , never):BBClient;
+	@:flash.property public var httpSocket(get , never):BBClient;
 
 	public function get_httpSocket():BBClient
 	{
 		return _bbClient;
 	}
 
-	public var webSocket(get , never):WSClient;
+	@:flash.property public var webSocket(get , never):WSClient;
 
 	public function get_webSocket():WSClient
 	{
@@ -433,7 +433,7 @@ class BitSwarmClient extends EventDispatcher
 		executeDisconnection(null);
 	}
 
-	public var udpManager(get, set):IUDPManager;
+	@:flash.property public var udpManager(get, set):IUDPManager;
 	private function get_udpManager():IUDPManager
 	{
 		return _udpManager;
@@ -453,7 +453,7 @@ class BitSwarmClient extends EventDispatcher
 		addController(1, _extController);
 	}
 
-	public var reconnectionSeconds(get, set):Int;
+	@:flash.property public var reconnectionSeconds(get, set):Int;
 	private function get_reconnectionSeconds():Int
 	{
 		return _reconnectionSeconds;

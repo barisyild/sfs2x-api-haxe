@@ -84,35 +84,35 @@ class SFSBuddy implements Buddy
 	}
 	
 	/** @inheritDoc */
-	public var id(get, null):Int;
+	@:flash.property public var id(get, null):Int;
  	private function get_id():Int
 	{
 		return _id;
 	}
 	
 	/** @inheritDoc */
-	public var name(get, null):String;
+	@:flash.property public var name(get, null):String;
  	private function get_name():String
 	{
 		return _name;
 	}
 	
 	/** @inheritDoc */
-	public var isBlocked(get, null):Bool;
+	@:flash.property public var isBlocked(get, null):Bool;
  	private function get_isBlocked():Bool
 	{
 		return _isBlocked;
 	}
 	
 	/** @inheritDoc */
-	public var isTemp(get, null):Bool;
+	@:flash.property public var isTemp(get, null):Bool;
  	private function get_isTemp():Bool
 	{
 		return _isTemp;
 	}
 	
 	/** @inheritDoc */
-	public var isOnline(get, null):Bool;
+	@:flash.property public var isOnline(get, null):Bool;
  	private function get_isOnline():Bool
 	{
 		var bv:BuddyVariable = getVariable(ReservedBuddyVariables.BV_ONLINE);
@@ -128,7 +128,7 @@ class SFSBuddy implements Buddy
 	}
 	
 	/** @inheritDoc */
-	public var state(get, null):String;
+	@:flash.property public var state(get, null):String;
  	private function get_state():String
 	{
 		/*
@@ -139,8 +139,8 @@ class SFSBuddy implements Buddy
 		return bv == null ? null:bv.getStringValue();
 	}
 
-	/** @inheritDoc */		
-	public var nickName(get, null):String;
+	/** @inheritDoc */
+	@:flash.property public var nickName(get, null):String;
  	private function get_nickName():String
 	{
 		var bv:BuddyVariable = getVariable(ReservedBuddyVariables.BV_NICKNAME);
@@ -148,7 +148,7 @@ class SFSBuddy implements Buddy
 	}
 	
 	/** @inheritDoc */
-	public var variables(get, null):Array<BuddyVariable>;
+	@:flash.property public var variables(get, null):Array<BuddyVariable>;
  	private function get_variables():Array<BuddyVariable>
 	{
 		return Lambda.array(_variables);

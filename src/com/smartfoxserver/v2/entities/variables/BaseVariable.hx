@@ -17,8 +17,8 @@ import com.smartfoxserver.v2.exceptions.SFSError;
  */
 class BaseVariable implements Variable
 {
-	@:isVar public var name(get, null) : String;
-	@:isVar public var type(get, null) : String;
+	@:flash.property @:isVar public var name(get, null) : String;
+	@:flash.property @:isVar public var type(get, null) : String;
 
 	/** @private */
 	private var _value : Dynamic;

@@ -13,8 +13,8 @@ class BaseController implements IController
 	{
 		log = bitSwarm.sfs.logger;
 	}
-	
-	public var id(get, set):Int;
+
+	@:flash.property public var id(get, set):Int;
  	private function get_id():Int
 	{
 		return _id;

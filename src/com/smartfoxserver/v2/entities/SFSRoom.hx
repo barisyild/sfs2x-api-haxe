@@ -164,14 +164,14 @@ class SFSRoom implements Room
 	}
 	
 	/** @inheritDoc */
-	public var id(get, null):Int;
+	@:flash.property public var id(get, null):Int;
  	private function get_id():Int
 	{
 		return _id;
 	}
 	
 	/** @inheritDoc */
-	public var name(get, set):String;
+	@:flash.property public var name(get, set):String;
  	private function get_name():String	
 	{
 		return _name;
@@ -184,35 +184,35 @@ class SFSRoom implements Room
 	}
 	
 	/** @inheritDoc */
-	public var groupId(get, null):String;
+	@:flash.property public var groupId(get, null):String;
  	private function get_groupId():String
 	{
 		return _groupId;
 	}
 	
 	/** @inheritDoc */
-	public var isGame(get, set):Bool;
+	@:flash.property public var isGame(get, set):Bool;
  	private function get_isGame():Bool
 	{
 		return _isGame;		
 	}
 	
 	/** @inheritDoc */
-	public var isHidden(get, set):Bool;
+	@:flash.property public var isHidden(get, set):Bool;
  	private function get_isHidden():Bool
 	{
 		return _isHidden;
 	}
 	
 	/** @inheritDoc */
-	public var isJoined(get, set):Bool;
+	@:flash.property public var isJoined(get, set):Bool;
  	private function get_isJoined():Bool
 	{
 		return _isJoined;
 	}
 	
 	/** @inheritDoc */
-	public var isPasswordProtected(get, set):Bool;
+	@:flash.property public var isPasswordProtected(get, set):Bool;
  	private function get_isPasswordProtected():Bool
 	{
 		return _isPasswordProtected;
@@ -243,7 +243,7 @@ class SFSRoom implements Room
 	}
 	
 	/** @private */
-	public var isManaged(get, set):Bool;
+	@:flash.property public var isManaged(get, set):Bool;
  	private function get_isManaged():Bool
 	{
 		return _isManaged;
@@ -274,7 +274,7 @@ class SFSRoom implements Room
 	*/
 	
 	/** @inheritDoc */
-	public var userCount(get, set):Int;
+	@:flash.property public var userCount(get, set):Int;
  	private function get_userCount():Int
 	{
 		// Return server count from UCountUpdate	
@@ -295,21 +295,21 @@ class SFSRoom implements Room
 	}
 	
 	/** @inheritDoc */
-	public var maxUsers(get, set):Int;
+	@:flash.property public var maxUsers(get, set):Int;
  	private function get_maxUsers():Int
 	{
 		return _maxUsers;
 	}
 	
 	/** @inheritDoc */
-	public var capacity(get, null):Int;
+	@:flash.property public var capacity(get, null):Int;
  	private function get_capacity():Int
 	{
 		return _maxUsers + _maxSpectators;
 	}
 	
 	/** @inheritDoc */
-	public var spectatorCount(get, set):Int;
+	@:flash.property public var spectatorCount(get, set):Int;
  	private function get_spectatorCount():Int
 	{
 		// No spectators in regular rooms
@@ -326,7 +326,7 @@ class SFSRoom implements Room
 	}
 	
 	/** @inheritDoc */
-	public var maxSpectators(get, set):Int;
+	@:flash.property public var maxSpectators(get, set):Int;
  	private function get_maxSpectators():Int
 	{
 		return _maxSpectators;
@@ -369,14 +369,14 @@ class SFSRoom implements Room
 	}
 	
 	/** @inheritDoc */
-	public var userList(get, null):Array<User>;
+	@:flash.property public var userList(get, null):Array<User>;
  	private function get_userList():Array<User>
 	{
 		return _userManager.getUserList();
 	}
 	
 	/** @inheritDoc */
-	public var playerList(get, null):Array<User>;
+	@:flash.property public var playerList(get, null):Array<User>;
  	private function get_playerList():Array<User>
 	{
 		var playerList:Array<User> = [];
@@ -391,7 +391,7 @@ class SFSRoom implements Room
 	}
 	
 	/** @inheritDoc */
-	public var spectatorList(get, null):Array<User>;
+	@:flash.property public var spectatorList(get, null):Array<User>;
  	private function get_spectatorList():Array<User>
 	{
 		var spectatorList:Array<User> = [];
@@ -438,7 +438,7 @@ class SFSRoom implements Room
 	}
 	
 	/** @inheritDoc */
-	public var properties(get, set):Dynamic;
+	@:flash.property public var properties(get, set):Dynamic;
  	private function get_properties():Dynamic
 	{
 		return _properties;
@@ -463,7 +463,7 @@ class SFSRoom implements Room
 	}
 	
 	/** @inheritDoc */
-	public var roomManager(get, set):IRoomManager;
+	@:flash.property public var roomManager(get, set):IRoomManager;
  	private function get_roomManager():IRoomManager
 	{
 		return _roomManager;

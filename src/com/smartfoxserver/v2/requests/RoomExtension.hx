@@ -35,7 +35,7 @@ class RoomExtension
 	 * Returns the name of the Extension to be attached to the Room.
 	 * It's the name of the server-side folder containing the Extension classes inside the main<em>[sfs2x-install-folder]/SFS2X/extensions</em>folder.
 	 */
-	public var id(get, set):String;
+	@:flash.property public var id(get, set):String;
  	private function get_id():String
 	{
 		return _id;
@@ -49,7 +49,7 @@ class RoomExtension
 	/**
 	 * Returns the fully qualified name of the main class of the Extension.
 	 */
-	public var className(get, set):String;
+	@:flash.property public var className(get, set):String;
  	private function get_className():String
 	{
 		return _className;
@@ -65,7 +65,7 @@ class RoomExtension
 	 * 
 	 * @see		#id
 	 */
-	public var propertiesFile(get, set):String;
+	@:flash.property public var propertiesFile(get, set):String;
  	private function get_propertiesFile():String
 	{
 		return _propertiesFile;

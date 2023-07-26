@@ -11,5 +11,5 @@ interface IProtocolCodec
 	function onPacketRead(packet:Dynamic):Void;
 	function onPacketWrite(message:IMessage):Void;
 
-	public var ioHandler(get, set):IoHandler;
+	@:flash.property public var ioHandler(get, set):IoHandler;
 }

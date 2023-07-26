@@ -94,21 +94,21 @@ class SFSUser implements User
 	}
 	
 	/** @inheritDoc */
-	public var id(get, null):Int;
+	@:flash.property public var id(get, null):Int;
  	private function get_id():Int
 	{
 		return _id;
 	}
 	
 	/** @inheritDoc */
-	public var name(get, null):String;
+	@:flash.property public var name(get, null):String;
  	private function get_name():String
 	{
 		return _name;
 	}
 	
 	/** @inheritDoc */
-	public var playerId(get, null):Null<Int>;
+	@:flash.property public var playerId(get, null):Null<Int>;
  	private function get_playerId():Null<Int>
 	{
 		// Return from default room
@@ -123,7 +123,7 @@ class SFSUser implements User
 	
 	
 	/** @inheritDoc */
-	public var privilegeId(get, set):Int;
+	@:flash.property public var privilegeId(get, set):Int;
  	private function get_privilegeId():Int
 	{
 		return _privilegeId;
@@ -160,14 +160,14 @@ class SFSUser implements User
 	}
 	
 	/** @inheritDoc */
-	public var isPlayer(get, null):Bool;
+	@:flash.property public var isPlayer(get, null):Bool;
  	private function get_isPlayer():Bool
 	{
 		return playerId > 0;
 	}
 	
 	/** @inheritDoc */
-	public var isSpectator(get, null):Bool;
+	@:flash.property public var isSpectator(get, null):Bool;
  	private function get_isSpectator():Bool
 	{
 		return !this.isPlayer;
@@ -209,14 +209,14 @@ class SFSUser implements User
 	}
 	
 	/** @inheritDoc */
-	public var isItMe(get, null):Bool;
+	@:flash.property public var isItMe(get, null):Bool;
  	private function get_isItMe():Bool
 	{
 		return _isItMe;
 	}
 	
 	/** @inheritDoc */
-	public var userManager(get, set):IUserManager;
+	@:flash.property public var userManager(get, set):IUserManager;
  	private function get_userManager():IUserManager
 	{
 		return _userManager;
@@ -283,7 +283,7 @@ class SFSUser implements User
 	}
 	
 	/** @inheritDoc */
-	public var properties(get, set):Dynamic;
+	@:flash.property public var properties(get, set):Dynamic;
  	private function get_properties():Dynamic
 	{
 		return _properties;
@@ -296,7 +296,7 @@ class SFSUser implements User
 	}
 	
 	/** @inheritDoc */
-	public var aoiEntryPoint(get, set):Vec3D;
+	@:flash.property public var aoiEntryPoint(get, set):Vec3D;
  	private function get_aoiEntryPoint():Vec3D
 	{
 		return _aoiEntryPoint;

@@ -12,7 +12,7 @@ import com.smartfoxserver.v2.entities.User;
 interface IRoomManager
 {
 	/** @private */
-	var ownerZone(get, null):String;
+	@:flash.property var ownerZone(get, null):String;
 	//function get ownerZone():String
 	
 	/** @private */
@@ -188,6 +188,6 @@ interface IRoomManager
 	function removeUser(user:User):Void;
 	
 	/** @private */
-	var smartFox(get, null):SmartFox;
+	@:flash.property var smartFox(get, null):SmartFox;
 	//function get smartFox():SmartFox
 }

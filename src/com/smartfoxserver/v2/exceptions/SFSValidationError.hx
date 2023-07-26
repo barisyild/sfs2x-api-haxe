@@ -12,8 +12,8 @@ class SFSValidationError extends Error
 		super(message, errorId);
 		_errors = errors;
 	}
-	
-	public var errors(get, null):Array<String>;
+
+	@:flash.property public var errors(get, null):Array<String>;
  	private function get_errors():Array<String>
 	{
 		return _errors;

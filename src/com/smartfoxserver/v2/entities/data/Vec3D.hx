@@ -49,7 +49,7 @@ class Vec3D
 	/**
 	 * Returns the position along the X axis.
 	 */
-	public var px(get, null):Float;
+	@:flash.property public var px(get, null):Float;
  	private function get_px():Float
 	{
 		return _px;
@@ -58,7 +58,7 @@ class Vec3D
 	/**
 	 * Returns the position along the Y axis.
 	 */
-	public var py(get, null):Float;
+	@:flash.property public var py(get, null):Float;
  	private function get_py():Float
 	{
 		return _py;
@@ -67,7 +67,7 @@ class Vec3D
 	/**
 	 * Returns the position along the Z axis.
 	 */
-	public var pz(get, null):Float;
+	@:flash.property public var pz(get, null):Float;
  	private function get_pz():Float
 	{
 		return _pz;

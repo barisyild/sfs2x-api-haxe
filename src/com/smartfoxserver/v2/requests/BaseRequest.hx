@@ -165,7 +165,7 @@ class BaseRequest implements IRequest
 		_id = id;
 	}
 
-	public var id(get, set):Int;
+	@:flash.property public var id(get, set):Int;
  	private function get_id():Int
 	{
 		return _id;
@@ -195,7 +195,7 @@ class BaseRequest implements IRequest
 			
 		return message;
 	}
-	public var targetController(get, set):Int;
+	@:flash.property public var targetController(get, set):Int;
  	private function get_targetController():Int
 	{
 		return _targetController;
@@ -205,7 +205,7 @@ class BaseRequest implements IRequest
 	{
 		return _targetController = target;	
 	}
-	public var isEncrypted(get, set):Bool;
+	@:flash.property public var isEncrypted(get, set):Bool;
  	private function get_isEncrypted():Bool
 	{
 		return _isEncrypted;

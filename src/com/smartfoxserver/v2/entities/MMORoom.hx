@@ -50,7 +50,7 @@ class MMORoom extends SFSRoom
 	 * 
 	 * @see	com.smartfoxserver.v2.requests.mmo.MMORoomSettings#defaultAOI MMORoomSettings.defaultAOI
 	 */
-	public var defaultAOI(get, set):Vec3D;
+	@:flash.property public var defaultAOI(get, set):Vec3D;
  	private function get_defaultAOI():Vec3D
 	{
 		return _defaultAOI;
@@ -62,7 +62,7 @@ class MMORoom extends SFSRoom
 	 * 
 	 * @see	com.smartfoxserver.v2.requests.mmo.MMORoomSettings#mapLimits MMORoomSettings.mapLimits
 	 */
-	public var lowerMapLimit(get, set):Vec3D;
+	@:flash.property public var lowerMapLimit(get, set):Vec3D;
  	private function get_lowerMapLimit():Vec3D
 	{
 		return _lowerMapLimit;	
@@ -74,7 +74,7 @@ class MMORoom extends SFSRoom
 	 * 
 	 * @see	com.smartfoxserver.v2.requests.mmo.MMORoomSettings#mapLimits MMORoomSettings.mapLimits
 	 */
-	public var higherMapLimit(get, set):Vec3D;
+	@:flash.property public var higherMapLimit(get, set):Vec3D;
  	private function get_higherMapLimit():Vec3D
 	{
 		return _higherMapLimit;

@@ -58,20 +58,20 @@ class BBClient extends EventDispatcher
 	//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	// Getters / Setters
 	//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-	
-	public var isConnected(get, null):Bool;
+
+	@:flash.property public var isConnected(get, null):Bool;
  	private function get_isConnected():Bool
 	{
 		return _sessId !=null;		
 	}
-	
-	public var isDebug(get, set):Bool;
+
+	@:flash.property public var isDebug(get, set):Bool;
  	private function get_isDebug():Bool
 	{
 		return _debug;		
 	}
-	
-	public var host(get, set):String;
+
+	@:flash.property public var host(get, set):String;
  	private function get_host():String
 	{
 		return _host;		
@@ -80,7 +80,7 @@ class BBClient extends EventDispatcher
 	{
 		return _host = value;		
 	}
-	public var port(get, set):Int;
+	@:flash.property public var port(get, set):Int;
  	private function get_port():Int
 	{
 		return _port;		
@@ -89,7 +89,7 @@ class BBClient extends EventDispatcher
 	{
 		return _port = value;		
 	}
-	public var sessionId(get, set):String;
+	@:flash.property public var sessionId(get, set):String;
  	private function get_sessionId():String
 	{
 		return _sessId;		
@@ -98,7 +98,7 @@ class BBClient extends EventDispatcher
 	{
 		return _sessId = value;		
 	}
-	public var pollSpeed(get, set):Int;
+	@:flash.property public var pollSpeed(get, set):Int;
 	
  	private function get_pollSpeed():Int
 	{
