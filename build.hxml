@@ -23,3 +23,7 @@
 --next
 
 -lua bin/sfs2x.lua
+
+--next
+
+-swf bin/sfs2x.swc
