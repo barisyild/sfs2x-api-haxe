@@ -264,7 +264,7 @@ class BBClient extends EventDispatcher
 		if(byteArray==null)
 			data = BB_NULL;
 		else
-			data = Base64.encode(#if flash @:privateAccess byteArray.b #elseif openfl byteArray #else byteArray.getBytes() #end);
+			data = Base64.encode(#if (flash || openfl) byteArray #else byteArray.getBytes() #end);
 
 		encoded +=(_sessId==null ? BB_NULL:_sessId)+ SEP + cmd + SEP + data;
 		return encoded;
