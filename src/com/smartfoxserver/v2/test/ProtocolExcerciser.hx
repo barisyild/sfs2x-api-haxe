@@ -1,8 +1,14 @@
 package com.smartfoxserver.v2.test;
 
 import com.smartfoxserver.v2.core.SFSIOHandler;
-
-import com.smartfoxserver.v2.util.ByteArray<Dynamic>;
+import com.smartfoxserver.v2.util.ByteArray;
+#if flash
+import flash.utils.Endian;
+#elseif openfl
+import openfl.utils.Endian;
+#else
+import com.hurlant.util.Endian;
+#end
 
 class ProtocolExcerciser
 {
@@ -17,7 +23,7 @@ class ProtocolExcerciser
 		0x34, 0x62, 0x31, 0x66, 0x62, 0x65, 0x34, 0x31, 0x65, 0x39, 0x37, 0x61, 0x36, 0x63, 0x00, 0x02,
 		0x63, 0x74, 0x04, 0x00, 0x00, 0x04, 0x00, 0x00, 0x02, 0x6D, 0x73, 0x04, 0x00, 0x1E, 0x84, 0x80,
 	];
-	private var testPacket:ByteArray<Dynamic>;
+	private var testPacket:ByteArray;
 	
 	public function new()
 	{
@@ -38,7 +44,7 @@ class ProtocolExcerciser
 		testPacket.endian = Endian.BIG_ENDIAN;
 		for(i in 0...testPacketData.length)
 		{
-			testPacket.writeByte(testPacketData[i])	
+			testPacket.writeByte(testPacketData[i])	;
 		}
 	}
 	
@@ -115,7 +121,7 @@ class ProtocolExcerciser
 	*/
 	public function fragmentedHeaderTest6():Void
 	{
-		var bb:ByteArray<Dynamic>=getBufferSlice(0);
+		var bb:ByteArray = getBufferSlice(0);
 		bb.writeBytes(testPacket, 0, 1);
 		ioHandler.onDataRead(bb);
 		ioHandler.onDataRead(getBufferSlice(1));

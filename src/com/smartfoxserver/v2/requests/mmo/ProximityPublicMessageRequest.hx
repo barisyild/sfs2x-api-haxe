@@ -1,5 +1,6 @@
 package com.smartfoxserver.v2.requests.mmo;
 
+import com.smartfoxserver.v2.requests.mmo.ProximityPublicMessageRequest;
 import com.smartfoxserver.v2.SmartFox;
 import com.smartfoxserver.v2.entities.MMORoom;
 import com.smartfoxserver.v2.entities.Room;
@@ -9,9 +10,9 @@ import com.smartfoxserver.v2.exceptions.SFSValidationError;
 import com.smartfoxserver.v2.requests.PublicMessageRequest;
 
 /** @private */
-internal class ProximityPublicMessageRequest extends PublicMessageRequest
+class ProximityPublicMessageRequest extends PublicMessageRequest
 {
-	public function ProximityPublicMessageRequest(message:String, targetRoom:Room, aoi:Vec3D, params:ISFSObject=null)
+	public function new(message:String, targetRoom:Room, aoi:Vec3D, params:ISFSObject=null)
 	{
 		super(message, params, targetRoom);
 		_aoi=aoi;
@@ -20,10 +21,10 @@ internal class ProximityPublicMessageRequest extends PublicMessageRequest
 	/** @exclude */ 
 	override public function validate(sfs:SmartFox):Void
 	{
-		var errors:Array<Dynamic>=[]
+		var errors:Array<String>=[];
 			
 		if(_message==null || _message.length==0)
-			errors.push("Public message is empty!")
+			errors.push("Public message is empty!");
 				
 		if(!(Std.isOfType(_room, MMORoom)))
 			errors.push("Target Room is not an MMORoom");
@@ -39,7 +40,11 @@ internal class ProximityPublicMessageRequest extends PublicMessageRequest
 	override public function execute(sfs:SmartFox):Void
 	{
 		super.execute(sfs);
-		
-		_aoi.isFloat()? _sfso.putFloatArray(KEY_AOI, _aoi.toArray()):_sfso.putIntArray(KEY_AOI, _aoi.toArray());
+
+		//Original Code
+		//_aoi.isFloat() ? _sfso.putFloatArray(ProximityPublicMessageRequest.KEY_AOI, _aoi.toArray()) : _sfso.putIntArray(ProximityPublicMessageRequest.KEY_AOI, _aoi.toArray());
+		//TODO: Check if this is correct
+
+		_aoi.isFloat() ? _sfso.putFloatArray(GenericMessageRequest.KEY_AOI, _aoi.toArray()) : _sfso.putFloatArray(GenericMessageRequest.KEY_AOI, _aoi.toArray());
 	}
 }

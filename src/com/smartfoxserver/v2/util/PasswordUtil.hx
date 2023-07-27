@@ -4,8 +4,6 @@ import com.hurlant.crypto.hash.IHash;
 import com.hurlant.crypto.hash.MD5;
 import com.hurlant.util.Hex;
 
-import com.smartfoxserver.v2.util.ByteArray<Dynamic>;
-
 /**
  * Helper class for logging in with a pre-hashed password.
  * This is needed if your server-side database stores User passwords hashed with MD5.
@@ -31,7 +29,7 @@ class PasswordUtil
 	public static function md5Password(pass:String):String
 	{
 		var hash:IHash=new MD5();
-		var data:ByteArray<Dynamic>=Hex.toArray(Hex.fromString(pass));
+		var data:#if flash ByteArray #else com.hurlant.util.ByteArray #end = Hex.toArray(Hex.fromString(pass));
 		
 		return Hex.fromArray(hash.hash(data));
 	}

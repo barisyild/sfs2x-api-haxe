@@ -1,7 +1,6 @@
 package com.smartfoxserver.v2.test;
 
 import com.smartfoxserver.v2.SmartFox;
-import com.smartfoxserver.v2.kernel;
 
 class ControllerInjection
 {

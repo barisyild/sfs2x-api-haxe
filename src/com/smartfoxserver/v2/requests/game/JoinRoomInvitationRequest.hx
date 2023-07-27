@@ -57,7 +57,7 @@ class JoinRoomInvitationRequest extends BaseRequest
 	private static inline var KEY_OPTIONAL_PARAMS : String = "op";
 
 	private var _targetRoom : Room;
-	private var _invitedUserNames : Array<Dynamic>;
+	private var _invitedUserNames : Array<String>;
 	private var _expirySeconds : Int;
 	private var _asSpectator : Bool;
 	private var _params : ISFSObject;
@@ -75,7 +75,7 @@ class JoinRoomInvitationRequest extends BaseRequest
 	 * @see		com.smartfoxserver.v2.SmartFox#send() SmartFox.send()
 	 * @see		com.smartfoxserver.v2.entities.Room Room
 	 */
-	public function new(targetRoom : Room, invitedUserNames : Array<Dynamic>, params : ISFSObject = null, expirySeconds : Int = 30, asSpectator : Bool = false)
+	public function new(targetRoom : Room, invitedUserNames : Array<String>, params : ISFSObject = null, expirySeconds : Int = 30, asSpectator : Bool = false)
 	{
 		super(BaseRequest.JoinRoomInvite);
 
@@ -90,7 +90,7 @@ class JoinRoomInvitationRequest extends BaseRequest
 	/** @private */
 	override public function validate(sfs : SmartFox) : Void
 	{
-		var errors : Array<Dynamic> = [];
+		var errors : Array<String> = [];
 
 		if (_targetRoom == null)
 		{

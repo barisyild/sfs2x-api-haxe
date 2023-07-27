@@ -1,5 +1,7 @@
 package com.smartfoxserver.v2.entities.variables;
 
+import com.smartfoxserver.v2.entities.data.SFSObject;
+import Type.ValueType;
 import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSArray;
@@ -75,7 +77,7 @@ class BaseVariable implements Variable
 	/** @inheritDoc */
 	public function getBoolValue() : Bool
 	{
-		return try cast(_value, Bool) catch(e:Dynamic) null;
+		return try cast(_value, Bool) catch(e:Dynamic) false;
 	}
 
 	/** @inheritDoc */
@@ -175,16 +177,13 @@ class BaseVariable implements Variable
 		}
 		else
 		{
-			var typeName : String = Type.typeof(value); //TODO: Fix typeof!
-
-			
-
-			if (typeName == "boolean")
+			var typeName : ValueType = Type.typeof(value); //TODO: Fix typeof!
+			if (typeName == ValueType.TBool)
 			{
 				this.type = VariableType.getTypeName(VariableType.BOOL);
 				// Check if number is Int or Double
 			}
-			else if (typeName == "number")
+			else if (typeName == ValueType.TFloat || typeName == ValueType.TInt)
 			{
 				// check if is int or double
 
@@ -197,14 +196,15 @@ class BaseVariable implements Variable
 					this.type = VariableType.getTypeName(VariableType.DOUBLE);
 				}
 			}
-			else if (typeName == "string")
+			else if (Std.isOfType(typeName, String))
 			{
 				this.type = VariableType.getTypeName(VariableType.STRING);
 				// Check which type of object is this
 			}
-			else if (typeName == "object")
+			else if (typeName == ValueType.TObject || Std.isOfType(typeName, SFSObject) || Std.isOfType(typeName, SFSArray))
 			{
-				var className : String = Type.getClassName(value); //TODO: Check this!
+				var className : String = Type.getClassName(value);
+				className = className.substring(className.lastIndexOf(".") + 1);
 
 				if (className == "SFSObject")
 				{

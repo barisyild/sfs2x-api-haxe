@@ -1,41 +1,50 @@
 -lib colyseus-websocket
 --class-path src
--main com.smartfoxserver.v2.SmartFox
 
 --each
 
--swf-version 11
+--macro "include('com.smartfoxserver')"
+-swf-version 17
 -swf bin/sfs2x.swc
 --swf-lib-extern swc/as3crypto.swc
+--debug
 
 --next
 
--swf-version 11
+--macro "include('com.smartfoxserver')"
+-swf-version 17
 -swf bin/sfs2x_full.swc
 --swf-lib swc/as3crypto.swc
+--debug
 
 --next
 
--python bin/sfs2x.py
+--macro "include('com.smartfoxserver')"
 -lib haxe-crypto
+-python bin/sfs2x.py
 
 --next
 
+--macro "include('com.smartfoxserver')"
 -php bin/php
 -lib haxe-crypto
 
 --next
 
--js bin/sfs2x.js
+#Fix Required for "colyseus-websocket/1,0,12/src/haxe/net/Socket2.hx:44: characters 16-38 : Unsupported platform"
+-main com.smartfoxserver.v2.SmartFox
 -D js-es=6
 -lib haxe-crypto
+-js bin/sfs2x.js
 
 --next
 
+--macro "include('com.smartfoxserver')"
 --jvm bin/sfs2x.jar
 -lib haxe-crypto
 
 --next
 
+--macro "include('com.smartfoxserver')"
 -lua bin/sfs2x.lua
 -lib haxe-crypto

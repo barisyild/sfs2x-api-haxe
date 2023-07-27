@@ -137,6 +137,9 @@ class BaseRequest implements IRequest
 	
 	/** @private */
 	public static inline var QuickJoinGame:Int = 303;
+
+	/** @private */
+	public static inline var JoinRoomInvite:Int = 304;
 	
 	/** @private */
 	public static inline var KEY_ERROR_CODE:String = "ec";

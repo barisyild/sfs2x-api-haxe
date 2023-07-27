@@ -50,6 +50,8 @@ class AdminMessageRequest extends GenericMessageRequest
 	 */
 	public function new(message:String, recipientMode:MessageRecipientMode, params:ISFSObject=null)
 	{
+		super();
+
 		if(recipientMode==null)
 			throw new ArgumentError("RecipientMode cannot be null!");
 		
