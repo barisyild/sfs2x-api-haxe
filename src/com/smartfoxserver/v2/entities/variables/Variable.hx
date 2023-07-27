@@ -12,13 +12,13 @@ interface Variable
 	/**
 	 * Indicates the name of this variable.
 	 */
-	@:flash.property var name(get, never) : String;
+	var name(get, never) : String;
 	/**
 	 * Indicates the type of this variable.
 	 *
 	 * @see		com.smartfoxserver.v2.entities.variables.VariableType VariableType
 	 */
-	@:flash.property var type(get, never) : String;
+	var type(get, never) : String;
 
 	/**
 	 * Retrieves the untyped value of this variable.

@@ -66,7 +66,7 @@ class MessageRecipientMode
 	/**
 	 * Returns the selected recipient mode.
 	 */
-	@:flash.property public var mode(get, null):Int;
+	public var mode(get, null):Int;
  	private function get_mode():Int
 	{
 		return _mode;
@@ -75,7 +75,7 @@ class MessageRecipientMode
 	/**
 	 * Returns the moderator/administrator message target, according to the selected recipient mode.
 	 */
-	@:flash.property public var target(get, null):Dynamic;
+	public var target(get, null):Dynamic;
  	private function get_target():Dynamic
 	{
 		return _target;

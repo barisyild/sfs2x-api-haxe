@@ -36,7 +36,7 @@ class TestProtocolCodec implements IProtocolCodec
 		trace("No write suppoerted");
 	}
 
-	@:flash.property public var ioHandler(get, set):IoHandler;
+	public var ioHandler(get, set):IoHandler;
  	private function get_ioHandler():IoHandler
 	{
 		return null;

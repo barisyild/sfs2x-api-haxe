@@ -9,9 +9,9 @@ interface IRequest
 	function validate(sfs:SmartFox):Void;
 	function execute(sfs:SmartFox):Void;
 
-	@:flash.property public var targetController(get, set):Int;
+	public var targetController(get, set):Int;
 
-	@:flash.property public var isEncrypted(get, set):Bool;
+	public var isEncrypted(get, set):Bool;
 	
 	function getMessage():IMessage;
 }

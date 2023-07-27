@@ -30,7 +30,7 @@ class DefaultUDPManager implements IUDPManager
 		logUsageError();
 	}
 	@:isVar
-	@:flash.property public var inited(get, null):Bool;
+	public var inited(get, null):Bool;
  	private function get_inited():Bool
 	{
 		return false;
@@ -40,7 +40,7 @@ class DefaultUDPManager implements IUDPManager
 		return inited = value;
 	}
 
-	@:flash.property public var sfs(get, set):SmartFox;
+	public var sfs(get, set):SmartFox;
 	
 	
 	

@@ -8,7 +8,7 @@ class SocketClient extends EventDispatcher {
     private var _socket:Socket2;
     private var _useSSL:Bool;
     private var _connected:Bool = false;
-    @:flash.property public var connected(get, null):Bool;
+    public var connected(get, null):Bool;
 
     public function get_connected():Bool
     {
@@ -19,7 +19,7 @@ class SocketClient extends EventDispatcher {
         super();
     }
 
-    @:flash.property public var socket(get, null):Socket2;
+    public var socket(get, null):Socket2;
 
     public function get_socket():Socket2
     {

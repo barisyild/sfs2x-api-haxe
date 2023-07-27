@@ -56,7 +56,7 @@ class SFSInvitation implements Invitation
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var id(get, set):Int;
+	public var id(get, set):Int;
  	private function get_id():Int
 	{
 	 	return _id;
@@ -69,28 +69,28 @@ class SFSInvitation implements Invitation
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var inviter(get, null):User;
+	public var inviter(get, null):User;
  	private function get_inviter():User
 	{
 		return _inviter;
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var invitee(get, null):User;
+	public var invitee(get, null):User;
  	private function get_invitee():User
 	{
 		return _invitee;
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var secondsForAnswer(get, null):Int;
+	public var secondsForAnswer(get, null):Int;
  	private function get_secondsForAnswer():Int
 	{
 		return _secondsForAnswer;
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var params(get, null):ISFSObject;
+	public var params(get, null):ISFSObject;
  	private function get_params():ISFSObject
 	{
 		return _params;

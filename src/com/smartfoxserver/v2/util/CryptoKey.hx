@@ -7,8 +7,8 @@ import com.smartfoxserver.v2.util.ByteArray;
  */
 class CryptoKey
 {
-	@:flash.property public var iv(get, null):ByteArray;
-	@:flash.property public var key(get, null):ByteArray;
+	public var iv(get, null):ByteArray;
+	public var key(get, null):ByteArray;
 	public function new(iv:ByteArray, key:ByteArray) 
 	{
 		this.iv = iv;

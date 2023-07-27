@@ -17,7 +17,7 @@ class Message implements IMessage
 		_isUDP = false;
 	}
 
-	@:flash.property public var id(get, set):Int;
+	public var id(get, set):Int;
 	function get_id():Int 
 	{
 		return _id;
@@ -28,7 +28,7 @@ class Message implements IMessage
 		return _id = value;
 	}
 
-	@:flash.property public var content(get, set):ISFSObject;
+	public var content(get, set):ISFSObject;
  	private function get_content():ISFSObject
 	{
 		return _content;
@@ -39,7 +39,7 @@ class Message implements IMessage
 		return this._content = obj	;
 	}
 
-	@:flash.property public var targetController(get, set):Int;
+	public var targetController(get, set):Int;
  	private function get_targetController():Int
 	{
 		return _targetController;
@@ -49,7 +49,7 @@ class Message implements IMessage
 		return this._targetController = value;	
 	}
 
-	@:flash.property public var isEncrypted(get, set):Bool;
+	public var isEncrypted(get, set):Bool;
  	private function get_isEncrypted():Bool
 	{
 		return _isEncrypted;
@@ -59,7 +59,7 @@ class Message implements IMessage
 		return _isEncrypted = value;
 	}
 
-	@:flash.property public var isUDP(get, set):Bool;
+	public var isUDP(get, set):Bool;
  	private function get_isUDP():Bool
 	{
 		return _isUDP;
@@ -70,7 +70,7 @@ class Message implements IMessage
 		return _isUDP=value;
 	}
 
-	@:flash.property public var packetId(get, set):Float;
+	public var packetId(get, set):Float;
  	private function get_packetId():Float
 	{
 		return _packetId;

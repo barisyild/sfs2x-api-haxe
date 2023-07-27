@@ -33,7 +33,7 @@ class LogicOperator
 	 * Returns the id of the current<em>LogicOperator</em>instance.
 	 * It can be the string "AND" or "OR".
 	 */
-	@:flash.property public var id(get, null):String;
+	public var id(get, null):String;
  	private function get_id():String
 	{
 		return _id;

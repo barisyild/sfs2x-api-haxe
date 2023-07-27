@@ -66,14 +66,14 @@ class SFSUserVariable implements UserVariable
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var name(get, null):String;
+	public var name(get, null):String;
  	private function get_name():String
 	{
 		return _name;
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var type(get, null):String;
+	public var type(get, null):String;
  	private function get_type():String
 	{
 		return _type;

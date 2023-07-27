@@ -67,7 +67,7 @@ class LagMonitor extends EventDispatcher
 		}
 	}
 
-	@:flash.property public var isRunning(get, null):Bool;
+	public var isRunning(get, null):Bool;
  	private function get_isRunning():Bool
 	{
 		return (_lastReqTime + (_interval * 1000)) > haxe.Timer.stamp();
@@ -88,7 +88,7 @@ class LagMonitor extends EventDispatcher
 		return averagePingTime;
 	}
 
-	@:flash.property public var lastPingTime(get, null):Float;
+	public var lastPingTime(get, null):Float;
  	private function get_lastPingTime():Float
 	{
 		if(_valueQueue.length>0)
@@ -97,7 +97,7 @@ class LagMonitor extends EventDispatcher
 			return 0;
 	}
 
-	@:flash.property public var averagePingTime(get, null):Float;
+	public var averagePingTime(get, null):Float;
  	private function get_averagePingTime():Float
 	{
 		if(_valueQueue.length==0)

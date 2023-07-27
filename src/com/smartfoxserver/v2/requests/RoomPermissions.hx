@@ -34,7 +34,7 @@ class RoomPermissions
 	 * 
 	 * @see		ChangeRoomNameRequest
 	 */
-	@:flash.property public var allowNameChange(get, set):Bool;
+	public var allowNameChange(get, set):Bool;
  	private function get_allowNameChange():Bool 
 	{ 
 		return _allowNameChange;
@@ -55,7 +55,7 @@ class RoomPermissions
 	 * 
 	 * @see		ChangeRoomPasswordStateRequest
 	 */
-	@:flash.property public var allowPasswordStateChange(get, set):Bool;
+	public var allowPasswordStateChange(get, set):Bool;
  	private function get_allowPasswordStateChange():Bool 
 	{ 
 		return _allowPasswordStateChange;
@@ -76,7 +76,7 @@ class RoomPermissions
 	 * 
 	 * @see		PublicMessageRequest
 	 */
-	@:flash.property public var allowPublicMessages(get, set):Bool;
+	public var allowPublicMessages(get, set):Bool;
  	private function get_allowPublicMessages():Bool 
 	{ 
 		return _allowPublicMessages;
@@ -98,7 +98,7 @@ class RoomPermissions
 	 * 
 	 * @see		ChangeRoomCapacityRequest
 	 */
-	@:flash.property public var allowResizing(get, set):Bool;
+	public var allowResizing(get, set):Bool;
  	private function get_allowResizing():Bool 
 	{ 
 		return _allowResizing;

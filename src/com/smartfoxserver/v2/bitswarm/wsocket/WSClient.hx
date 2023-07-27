@@ -8,8 +8,8 @@ import com.smartfoxserver.v2.util.ByteArray;
 
 class WSClient extends EventDispatcher
 {
-	@:flash.property public var connected(get, never) : Bool;
-	@:flash.property public var isDebug(get, set) : Bool;
+	public var connected(get, never) : Bool;
+	public var isDebug(get, set) : Bool;
 
 	private var ws:WebSocket = null;
 	private var _debug : Bool = false;
@@ -41,7 +41,7 @@ class WSClient extends EventDispatcher
 		return value;
 	}
 
-	@:flash.property public var protocol(get, never) : String;
+	public var protocol(get, never) : String;
 
 	private function get_protocol():String
 	{

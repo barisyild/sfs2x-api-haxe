@@ -81,21 +81,21 @@ class SFSBuddyVariable implements BuddyVariable
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var isOffline(get, null):Bool;
+	public var isOffline(get, null):Bool;
  	private function get_isOffline():Bool
 	{
 		return _name.charAt(0) == "$";
 	}
 
 	/** @inheritDoc */
-	@:flash.property public var name(get, null):String;
+	public var name(get, null):String;
  	private function get_name():String
 	{
 		return _name;
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var type(get, null):String;
+	public var type(get, null):String;
  	private function get_type():String
 	{
 		return _type;

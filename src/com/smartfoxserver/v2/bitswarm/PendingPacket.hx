@@ -18,10 +18,10 @@ class PendingPacket
 		_buffer.endian = Endian.BIG_ENDIAN;
 	}
 
-	@:flash.property public var header(get, set):PacketHeader;
+	public var header(get, set):PacketHeader;
 
 
-	@:flash.property public var buffer(get, set):ByteArray;
+	public var buffer(get, set):ByteArray;
  	private function get_buffer():ByteArray
 	{
 		return _buffer;

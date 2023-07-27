@@ -56,7 +56,7 @@ class SFSBuddyManager implements IBuddyManager
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var isInited(get, null):Bool;
+	public var isInited(get, null):Bool;
  	private function get_isInited():Bool
 	{
 		return _inited;
@@ -142,7 +142,7 @@ class SFSBuddyManager implements IBuddyManager
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var offlineBuddies(get, null):Array<Buddy>;
+	public var offlineBuddies(get, null):Array<Buddy>;
  	private function get_offlineBuddies():Array<Buddy>
 	{
 		var buddies:Array<Buddy> = [];
@@ -157,7 +157,7 @@ class SFSBuddyManager implements IBuddyManager
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var onlineBuddies(get, null):Array<Buddy>;
+	public var onlineBuddies(get, null):Array<Buddy>;
 	
  	private function get_onlineBuddies():Array<Buddy>
 	{
@@ -173,7 +173,7 @@ class SFSBuddyManager implements IBuddyManager
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var buddyList(get, null):Array<Buddy>;
+	public var buddyList(get, null):Array<Buddy>;
  	private function get_buddyList():Array<Buddy>
 	{
 		return Lambda.array(_buddiesByName);
@@ -186,14 +186,14 @@ class SFSBuddyManager implements IBuddyManager
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var myVariables(get, null):Array<BuddyVariable>;
+	public var myVariables(get, null):Array<BuddyVariable>;
  	private function get_myVariables():Array<BuddyVariable>
 	{
 		return cast ArrayUtil.objToArray(_myVariables);	
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var myOnlineState(get, null):Bool;
+	public var myOnlineState(get, null):Bool;
  	private function get_myOnlineState():Bool
 	{
 		// Manager not inited, we're offline
@@ -211,7 +211,7 @@ class SFSBuddyManager implements IBuddyManager
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var myNickName(get, null):String;
+	public var myNickName(get, null):String;
  	private function get_myNickName():String
 	{
 		var nickNameVar:BuddyVariable = getMyVariable(ReservedBuddyVariables.BV_NICKNAME);
@@ -219,7 +219,7 @@ class SFSBuddyManager implements IBuddyManager
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var myState(get, null):String;
+	public var myState(get, null):String;
  	private function get_myState():String
 	{
 		var stateVar:BuddyVariable = getMyVariable(ReservedBuddyVariables.BV_STATE);
@@ -227,7 +227,7 @@ class SFSBuddyManager implements IBuddyManager
 	}
 	
 	/** @inheritDoc */
-	@:flash.property public var buddyStates(get, null):Array<String>;
+	public var buddyStates(get, null):Array<String>;
  	private function get_buddyStates():Array<String>
 	{
 		return _buddyStates;

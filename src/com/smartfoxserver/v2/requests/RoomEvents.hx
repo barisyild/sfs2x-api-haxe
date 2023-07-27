@@ -34,7 +34,7 @@ class RoomEvents
 	 * 
 	 * @see		com.smartfoxserver.v2.SmartFox#event:userEnterRoom userEnterRoom event
 	 */
-	@:flash.property public var allowUserEnter(get, set):Bool;
+	public var allowUserEnter(get, set):Bool;
  	private function get_allowUserEnter():Bool 
 	{ 
 		return _allowUserEnter;
@@ -53,7 +53,7 @@ class RoomEvents
 	 * 
 	 * @see		com.smartfoxserver.v2.SmartFox#event:userExitRoom userExitRoom event
 	 */
-	@:flash.property public var allowUserExit(get, set):Bool;
+	public var allowUserExit(get, set):Bool;
  	private function get_allowUserExit():Bool 
 	{ 
 		return _allowUserExit;
@@ -72,7 +72,7 @@ class RoomEvents
 	 * 
 	 * @see		com.smartfoxserver.v2.SmartFox#event:userCountChange userCountChange event
 	 */
-	@:flash.property public var allowUserCountChange(get, set):Bool;
+	public var allowUserCountChange(get, set):Bool;
  	private function get_allowUserCountChange():Bool 
 	{ 
 		return _allowUserCountChange;
@@ -91,7 +91,7 @@ class RoomEvents
 	 * 
 	 * @see		com.smartfoxserver.v2.SmartFox#event:userVariablesUpdate userVariablesUpdate event
 	 */
-	@:flash.property public var allowUserVariablesUpdate(get, set):Bool;
+	public var allowUserVariablesUpdate(get, set):Bool;
  	private function get_allowUserVariablesUpdate():Bool 
 	{ 
 		return _allowUserVariablesUpdate;

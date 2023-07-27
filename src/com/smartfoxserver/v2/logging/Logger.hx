@@ -88,7 +88,7 @@ class Logger extends EventDispatcher
 	/**
 	 * Indicates whether or not the output of logged messages to the console window of Adobe Flash and Flex/Flash Builder is enabled.
 	 */
-	@:flash.property public var enableConsoleTrace(get, set):Bool;
+	public var enableConsoleTrace(get, set):Bool;
  	private function get_enableConsoleTrace():Bool
 	{
 		return _enableConsoleTrace;
@@ -108,7 +108,7 @@ class Logger extends EventDispatcher
 	 * @see 	#event:warn warn event
 	 * @see 	#event:error error event
 	 */
-	@:flash.property public var enableEventDispatching(get, set):Bool;
+	public var enableEventDispatching(get, set):Bool;
  	private function get_enableEventDispatching():Bool
 	{
 		return _enableEventDispatching;
@@ -127,7 +127,7 @@ class Logger extends EventDispatcher
 	 * 
 	 * @see		LogLevel
 	 */
-	@:flash.property public var loggingLevel(get, set):Int;
+	public var loggingLevel(get, set):Int;
  	private function get_loggingLevel():Int
 	{
 		return _loggingLevel;	

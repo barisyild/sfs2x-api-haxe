@@ -94,7 +94,7 @@ class ExtensionRequest extends BaseRequest
 	}
 	
 	/** @private */
-	@:flash.property public var useUDP(get, null):Bool;
+	public var useUDP(get, null):Bool;
  	private function get_useUDP():Bool
 	{
 		return _useUDP;

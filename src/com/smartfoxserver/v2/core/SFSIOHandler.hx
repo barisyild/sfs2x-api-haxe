@@ -51,7 +51,7 @@ class SFSIOHandler implements IoHandler
 		fullPacketDump=b;
 	}
 
-	@:flash.property public var codec(get, set):IProtocolCodec;
+	public var codec(get, set):IProtocolCodec;
  	private function get_codec():IProtocolCodec
 	{
 		return protocolCodec;

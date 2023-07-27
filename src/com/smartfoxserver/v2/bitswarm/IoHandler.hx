@@ -9,5 +9,5 @@ interface IoHandler
 {
 	function onDataRead(buffer:ByteArray):Void;
 	function onDataWrite(message:IMessage):Void;
-	@:flash.property var codec(get, set):IProtocolCodec;
+	var codec(get, set):IProtocolCodec;
 }

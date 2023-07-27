@@ -35,7 +35,7 @@ class PacketHeader
 							);
 	}
 
-	@:flash.property public var expectedLen(get, set):Int;
+	public var expectedLen(get, set):Int;
  	private function get_expectedLen():Int
 	{
 		return _expectedLen;
@@ -45,7 +45,7 @@ class PacketHeader
 		return _expectedLen = value;
 	}
 
-	@:flash.property public var binary(get, set):Bool;
+	public var binary(get, set):Bool;
  	private function get_binary():Bool
 	{
 		return _binary;
@@ -55,7 +55,7 @@ class PacketHeader
 		return _binary = value;
 	}
 
-	@:flash.property public var compressed(get, set):Bool;
+	public var compressed(get, set):Bool;
  	private function get_compressed():Bool
 	{
 		return _compressed;
@@ -65,7 +65,7 @@ class PacketHeader
 		return _compressed = value;
 	}
 
-	@:flash.property public var encrypted(get, set):Bool;
+	public var encrypted(get, set):Bool;
  	private function get_encrypted():Bool
 	{
 		return	_encrypted;
@@ -75,7 +75,7 @@ class PacketHeader
 		return _encrypted = value;
 	}
 
-	@:flash.property public var blueBoxed(get, set):Bool;
+	public var blueBoxed(get, set):Bool;
  	private function get_blueBoxed():Bool
 	{
 		return	_blueBoxed;	
@@ -86,7 +86,7 @@ class PacketHeader
 		return _blueBoxed = value;	
 	}
 
-	@:flash.property public var bigSized(get, set):Bool;
+	public var bigSized(get, set):Bool;
  	private function get_bigSized():Bool
 	{
 		return	_bigSized;
