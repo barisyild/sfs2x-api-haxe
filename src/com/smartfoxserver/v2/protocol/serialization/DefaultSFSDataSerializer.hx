@@ -25,13 +25,7 @@ import com.smartfoxserver.v2.entities.data.SFSDataType;
 import com.smartfoxserver.v2.entities.data.SFSDataWrapper;
 import com.smartfoxserver.v2.entities.data.SFSObject;
 import com.smartfoxserver.v2.exceptions.SFSCodecError;
-#if flash
-import flash.utils.Endian;
-#elseif openfl
-import openfl.utils.Endian;
-#else
-import com.hurlant.util.Endian;
-#end
+import com.smartfoxserver.v2.util.Endian;
 
 /** @private */
 class DefaultSFSDataSerializer implements ISFSDataSerializer

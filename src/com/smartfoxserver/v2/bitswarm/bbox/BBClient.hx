@@ -1,13 +1,7 @@
 package com.smartfoxserver.v2.bitswarm.bbox;
 
 //import com.hurlant.util.Base64;
-#if flash
-import flash.utils.Endian;
-#elseif openfl
-import openfl.utils.Endian;
-#else
-import com.hurlant.util.Endian;
-#end
+import com.smartfoxserver.v2.util.Endian;
 import com.smartfoxserver.v2.events.Event;
 import com.smartfoxserver.v2.events.EventDispatcher;
 import com.smartfoxserver.v2.util.ByteArray;
@@ -277,7 +271,7 @@ class BBClient extends EventDispatcher
 			throw new ArgumentError("Unexpected Response format. Missing BlueBox header:" +(rawData.length<1024 ? rawData:"[too big data]"));
 		*/
 
-		var byteArray:ByteArray = #if flash @:privateAccess Base64.decode(rawData).b #else ByteArray.fromBytes(Base64.decode(rawData)) #end;
+		var byteArray:ByteArray = #if flash Base64.decode(rawData).getData() #else ByteArray.fromBytes(Base64.decode(rawData)) #end;
 		byteArray.endian = Endian.BIG_ENDIAN;
 		return byteArray;
 	}

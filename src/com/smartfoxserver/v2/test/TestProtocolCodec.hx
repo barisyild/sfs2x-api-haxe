@@ -6,13 +6,7 @@ import com.smartfoxserver.v2.bitswarm.IoHandler;
 import com.smartfoxserver.v2.protocol.IProtocolCodec;
 import com.smartfoxserver.v2.protocol.serialization.DefaultObjectDumpFormatter;
 import com.smartfoxserver.v2.util.ByteArray;
-#if flash
-import flash.utils.Endian;
-#elseif openfl
-import openfl.utils.Endian;
-#else
-import com.hurlant.util.Endian;
-#end
+import com.smartfoxserver.v2.util.Endian;
 
 class TestProtocolCodec implements IProtocolCodec
 {

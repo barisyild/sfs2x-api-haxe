@@ -16,13 +16,6 @@ import com.smartfoxserver.v2.events.Event;
 import com.smartfoxserver.v2.events.EventDispatcher;
 import com.smartfoxserver.v2.events.IOErrorEvent;
 import com.smartfoxserver.v2.util.ByteArray;
-#if flash
-import flash.utils.Endian;
-#elseif openfl
-import openfl.utils.Endian;
-#else
-import com.hurlant.util.Endian;
-#end
 
 /** @private */
 class BitSwarmClient extends EventDispatcher

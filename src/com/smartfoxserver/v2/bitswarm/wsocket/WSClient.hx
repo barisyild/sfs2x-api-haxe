@@ -1,12 +1,6 @@
 ﻿package com.smartfoxserver.v2.bitswarm.wsocket;
 
-#if flash
-import flash.utils.Endian;
-#elseif openfl
-import openfl.utils.Endian;
-#else
-import com.hurlant.util.Endian;
-#end
+import com.smartfoxserver.v2.util.Endian;
 import haxe.io.Bytes;
 import haxe.net.WebSocket;
 import com.smartfoxserver.v2.events.EventDispatcher;
@@ -67,7 +61,7 @@ class WSClient extends EventDispatcher
 			dispatchEvent(new WSEvent(WSEvent.CONNECT, {}));
 		};
 		ws.onmessageBytes = function(bytes:Bytes) {
-			var byteArray:ByteArray = #if flash @:privateAccess bytes.b #else ByteArray.fromBytes(bytes) #end;
+			var byteArray:ByteArray = #if flash bytes.getData() #else ByteArray.fromBytes(bytes) #end;
 			byteArray.endian = Endian.BIG_ENDIAN;
 			dispatchEvent(new WSEvent(WSEvent.DATA, {
 				data: byteArray

@@ -1,4 +1,10 @@
 package com.smartfoxserver.v2.events;
+
+#if flash
+typedef Event = flash.events.Event;
+#elseif openfl
+typedef Event = openfl.events.Event;
+#else
 class Event {
     public var type (default, null):String;
     public var bubbles (default, null):Bool;
@@ -19,3 +25,5 @@ class Event {
         return "[" + type + "]";
     }
 }
+
+#end

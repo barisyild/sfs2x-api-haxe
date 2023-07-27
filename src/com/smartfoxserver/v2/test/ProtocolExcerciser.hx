@@ -2,13 +2,7 @@ package com.smartfoxserver.v2.test;
 
 import com.smartfoxserver.v2.core.SFSIOHandler;
 import com.smartfoxserver.v2.util.ByteArray;
-#if flash
-import flash.utils.Endian;
-#elseif openfl
-import openfl.utils.Endian;
-#else
-import com.hurlant.util.Endian;
-#end
+import com.smartfoxserver.v2.util.Endian;
 
 class ProtocolExcerciser
 {

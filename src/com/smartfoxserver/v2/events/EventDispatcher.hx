@@ -1,4 +1,10 @@
 package com.smartfoxserver.v2.events;
+
+#if flash
+typedef EventDispatcher = flash.events.EventDispatcher;
+#elseif openfl
+typedef EventDispatcher = openfl.events.EventDispatcher;
+#else
 class EventDispatcher {
     private var eventList:Map<String, Array<Dynamic->Void>>;
 
@@ -68,3 +74,5 @@ class EventDispatcher {
         }
     }
 }
+
+#end
