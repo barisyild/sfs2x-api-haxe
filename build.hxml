@@ -4,22 +4,6 @@
 --each
 
 --macro "include('com.smartfoxserver')"
--swf-version 17
--swf bin/sfs2x.swc
---swf-lib-extern swc/as3crypto.swc
---debug
-
---next
-
---macro "include('com.smartfoxserver')"
--swf-version 17
--swf bin/sfs2x_full.swc
---swf-lib swc/as3crypto.swc
---debug
-
---next
-
---macro "include('com.smartfoxserver')"
 -lib haxe-crypto
 -python bin/sfs2x.py
 
