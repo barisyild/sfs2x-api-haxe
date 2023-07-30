@@ -70,7 +70,7 @@ class LagMonitor extends EventDispatcher
 	public var isRunning(get, null):Bool;
  	private function get_isRunning():Bool
 	{
-		return (_lastReqTime + (_interval * 1000)) > haxe.Timer.stamp();
+		return (_lastReqTime + (_interval * 1000)) > haxe.Timer.stamp() && _thread != null;
 	}
 	
 	public function onPingPong():Float
