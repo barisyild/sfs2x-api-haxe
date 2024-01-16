@@ -118,7 +118,7 @@ class WSClient extends EventDispatcher
 
 	public function send(binData : ByteArray) : Void
 	{
-		ws.sendBytes(cast binData);
+		ws.sendBytes(#if flash Bytes.ofData(binData) #else cast binData #end);
 	}
 
 	public function close() : Void
