@@ -443,11 +443,10 @@ class DefaultSFSDataSerializer implements ISFSDataSerializer
 		return new SFSDataWrapper(SFSDataType.LONG, decodeLongValue(buffer));
 	}
 	
-	// TODO:Needs Testing!
 	private function decodeLongValue(buffer:ByteArray):Float
 	{
 		var hi32:Int = buffer.readInt();// preserve long sign
-		var lo32:Int = buffer.readUnsignedInt();// low 32bits can be unsigned
+		var lo32:UInt = buffer.readUnsignedInt();// low 32bits can be unsigned
 			
 		// return 64 bit long value
 		return(hi32 * Math.pow(2, 32)) + lo32;
