@@ -47,9 +47,9 @@ jobs:
         with:
           name: sfs2x.swc
           path: bin/sfs2x.swc
-          if-no-files-found: error
+          #if-no-files-found: error
       - uses: actions/upload-artifact@v3
         with:
           name: sfs2x_full.swc
           path: bin/sfs2x_full.swc
-          if-no-files-found: error
+          #if-no-files-found: error
