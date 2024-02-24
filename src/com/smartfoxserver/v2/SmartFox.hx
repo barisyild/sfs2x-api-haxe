@@ -887,16 +887,28 @@ class SmartFox extends EventDispatcher
 	"Linux"
 	#elseif windows
 	"Windows"
+	#elseif macos
+	"macOS"
+	#elseif ios
+	"iOS"
 	#elseif cpp
 	"C++"
-	#elseif js
-	"JavaScript"
-	#elseif html5
+	#elseif (js || html5)
 	"JavaScript"
 	#elseif hl
 	"HashLink"
 	#elseif python
 	"Python"
+	#elseif tizen
+	"Tizen"
+	#elseif cs
+	"C#"
+	#elseif cppia
+	"Cppia"
+	#elseif java
+	"Java"
+	#elseif php
+	"PHP"
 	#else
 	"Unknown"
 	#end
