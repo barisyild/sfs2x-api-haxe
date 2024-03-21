@@ -23,11 +23,7 @@ class WSClient extends EventDispatcher
 
 	private function get_connected() : Bool
 	{
-		if (ws == null)
-		{
-			return false;
-		}
-		return _connected;
+		return ws != null && _connected;
 	}
 
 	private function get_isDebug() : Bool
@@ -123,7 +119,6 @@ class WSClient extends EventDispatcher
 
 	public function close() : Void
 	{
-		_connected = false;
 		ws.close();
 	}
 }

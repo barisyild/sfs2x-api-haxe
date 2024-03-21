@@ -190,7 +190,7 @@ class BitSwarmClient extends EventDispatcher
 		_wsClient = new WSClient();
 		_wsClient.addEventListener(WSEvent.CONNECT, this.onWSConnect);
 		_wsClient.addEventListener(WSEvent.DATA, this.onWSData);
-		_wsClient.addEventListener(WSEvent.CLOSED, this.onWSClosed);
+		_wsClient.addEventListener(WSEvent.CLOSED, this.onWSClose);
 		_wsClient.addEventListener(WSEvent.IO_ERROR, this.onWSError);
 		_wsClient.addEventListener(WSEvent.SECURITY_ERROR, this.onWSSecurityError);
 	}
@@ -209,9 +209,14 @@ class BitSwarmClient extends EventDispatcher
 		}
 	}
 
-	private function onWSClosed(evt : WSEvent) : Void
+	private function onWSClose(evt : WSEvent) : Void
 	{
-		processClose(false);
+		if (Std.isOfType(evt, BitSwarmEvent)) {
+			var evt : BitSwarmEvent = cast evt;
+			processClose(evt.params.reason == ClientDisconnectionReason.MANUAL, evt);
+		} else {
+			processClose(false);
+		}
 	}
 
 	private function onWSError(evt : WSEvent) : Void
