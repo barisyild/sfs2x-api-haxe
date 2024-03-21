@@ -544,6 +544,8 @@ class BitSwarmClient extends EventDispatcher
 		// We are out of time... connection failed:(
 		else
 		{
+			// Do not attempt to reconnect anymore
+			_attemptingReconnection = false;
 			dispatchEvent(new BitSwarmEvent(BitSwarmEvent.DISCONNECT, {reason:ClientDisconnectionReason.UNKNOWN}));
 		}
 	}
