@@ -428,6 +428,7 @@ class BitSwarmClient extends EventDispatcher
 			_wsClient.close();
 		}
 
+		_connected = false;
 		executeDisconnection(null);
 	}
 

@@ -21,9 +21,9 @@ class WSClient extends EventDispatcher
 		super();
 	}
 
-	private function get_connected() : Bool
+	private inline function get_connected() : Bool
 	{
-		return ws != null && _connected;
+		return _connected;
 	}
 
 	private function get_isDebug() : Bool
@@ -64,19 +64,10 @@ class WSClient extends EventDispatcher
 			}));
 		};
 		ws.onclose = function(?e:Dynamic) {
-			if(!_connected)
-				return;
-			_connected = false;
-			dispatchEvent(new WSEvent(WSEvent.CLOSED, { }));
-			//ws = null;
+			handleConnectionLost();
 		};
 		ws.onerror = function(error:String) {
-			_connected = false;
-			var wsEvt : WSEvent = new WSEvent(WSEvent.IO_ERROR, {
-				message : error
-			});
-			dispatchEvent(wsEvt);
-			//ws = null;
+			handleIOError(error);
 		};
 
 		#if openfl
@@ -119,7 +110,29 @@ class WSClient extends EventDispatcher
 
 	public function close() : Void
 	{
-		ws.close();
+		handleConnectionLost(false);
+	}
+
+	private function handleConnectionLost(fireEvent:Bool=true):Void
+	{
+		if(_connected)
+		{
+			_connected = false;
+			ws.close();
+
+			// Fire event to Bitswarm client
+			if(fireEvent)
+				dispatchEvent(new WSEvent(WSEvent.CLOSED, { }));
+		}
+	}
+
+	private function handleIOError(error:String):Void
+	{
+		_connected = false;
+		var wsEvt : WSEvent = new WSEvent(WSEvent.IO_ERROR, {
+			message : error
+		});
+		dispatchEvent(wsEvt);
 	}
 }
 
