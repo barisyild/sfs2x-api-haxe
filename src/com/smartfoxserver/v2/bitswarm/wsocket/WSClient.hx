@@ -51,6 +51,15 @@ class WSClient extends EventDispatcher
 			throw "WebSocket session is already connected";
 		}
 		_useSSL = useSSL;
+
+		if(ws != null)
+		{
+			ws.onopen = function () {};
+			ws.onmessageBytes = function(bytes:Bytes) {};
+			ws.onclose = function(?e:Dynamic) {};
+			ws.onerror = function(error:String) {};
+		}
+
 		ws = WebSocket.create(protocol + url + ":" + port +"/BlueBox/websocket", null, _debug);
 		ws.onopen = function () {
 			_connected = true;
@@ -64,7 +73,8 @@ class WSClient extends EventDispatcher
 			}));
 		};
 		ws.onclose = function(?e:Dynamic) {
-			handleConnectionLost();
+			_connected = false;
+			dispatchEvent(new WSEvent(WSEvent.CLOSED, {}));
 		};
 		ws.onerror = function(error:String) {
 			handleIOError(error);
@@ -110,20 +120,9 @@ class WSClient extends EventDispatcher
 
 	public function close() : Void
 	{
-		handleConnectionLost(false);
-	}
-
-	private function handleConnectionLost(fireEvent:Bool=true):Void
-	{
-		if(_connected)
-		{
-			_connected = false;
-			ws.close();
-
-			// Fire event to Bitswarm client
-			if(fireEvent)
-				dispatchEvent(new WSEvent(WSEvent.CLOSED, { }));
-		}
+		ws.onclose = function(?e:Dynamic) {};
+		_connected = false;
+		ws.close();
 	}
 
 	private function handleIOError(error:String):Void
