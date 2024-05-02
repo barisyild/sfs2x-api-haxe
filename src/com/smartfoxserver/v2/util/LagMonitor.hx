@@ -13,7 +13,7 @@ import com.smartfoxserver.v2.events.EventDispatcher;
  */
 class LagMonitor extends EventDispatcher
 {
-	private var _lastReqTime:Float;
+	private var _lastReqTime:Float = 0.0;
 	private var _valueQueue:Array<Float>;
 	private var _interval:Float;
 	private var _queueSize:Int;
